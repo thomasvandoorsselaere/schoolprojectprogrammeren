@@ -1,15 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { AlertModule } from 'ngx-bootstrap'
+import { AlertModule } from 'ngx-bootstrap';
 
-import { AppRoutingModule } from './app-routing.module';
+import { routes } from './routing';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { OverviewComponent } from './overview/overview.component';
 import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
+import {
+   CollapsibleWellComponent
+ } from './common/index';
+import { BookService } from './shared/books.service';
+import { BooksResolver } from './books-resolver.service';
+
 
 @NgModule({
   declarations: [
@@ -17,16 +24,20 @@ import { DetailsComponent } from './details/details.component';
     NavComponent,
     OverviewComponent,
     CreateComponent,
-    DetailsComponent
+    DetailsComponent,
+    CollapsibleWellComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    BookService,
+    BooksResolver
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

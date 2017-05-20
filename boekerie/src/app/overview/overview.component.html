@@ -1,18 +1,23 @@
-<div class="container">
-  <h2>Al onze boeken</h2>
-  <div class="list-group">
-    <a href="#" class="list-group-item active">
-      <h4 class="list-group-item-heading">Boek 1</h4>
-      <p class="list-group-item-text">Details boek 1</p>
-    </a>
-    <a href="#" class="list-group-item">
-      <h4 class="list-group-item-heading">Boek 2</h4>
-      <p class="list-group-item-text">Details boek 2</p>
-    </a>
-    <a href="#" class="list-group-item">
-      <h4 class="list-group-item-heading">Boek 3</h4>
-      <p class="list-group-item-text">Details boek 3</p>
-    </a>
+<div class="container" *ngFor="let book of books">
+  <div class="col-md-10">
+    <app-collapsible-well>
+      <div well-title>
+        "{{ book.titel }}" by {{ book.auteur.naam }}
+      </div>
+      <div well-body>
+        <span>
+          <img class="img-rounded" height="250px" src="{{ book.cover }}"/>
+        </span><br />
+        <span>
+          Genre: {{ book.genre.naam }}<br /><br />Tags:
+            <div *ngFor="let tag of book.tags" class="badge">
+              <span>
+                <span aria-hidden="true" class="glyphicon glyphicon-tag"></span>
+                <div>{{ tag | uppercase }}</div>
+              </span>
+            </div>
+        </span>
+      </div>
+    </app-collapsible-well>
   </div>
 </div>
-
