@@ -16,7 +16,8 @@
                 <div>{{ tag | uppercase }}</div>
               </span>
             </div>
-        </span>
+                   <button type="button" class="btn btn-default" [routerLink]="['/details', book.isbn]" >Detail Boek</button>
+           </span>
       </div>
     </app-collapsible-well>
   </div>

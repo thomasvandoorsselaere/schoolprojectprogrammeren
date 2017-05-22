@@ -18,6 +18,7 @@ import { BookService } from './shared/books.service';
 import { BooksResolver } from './books-resolver.service';
 import { ValutaPipe } from './shared/valuta.pipe';
 import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
+import { DetailsResolver } from "app/details/books-details-resolver.service";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
   ],
   providers: [
     BookService,
-    BooksResolver
+    BooksResolver,
+    DetailsResolver
   ],
   bootstrap: [AppComponent]
 })

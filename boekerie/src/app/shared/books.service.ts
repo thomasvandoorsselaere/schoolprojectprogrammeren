@@ -17,6 +17,10 @@ export class BookService {
   getBooks() {
     return this.books;
   }
+
+  getDetails(isbn){
+    return this.getBooks().find(i => i.isbn === isbn);
+  }
  /* private handleError(error: Response) {
       return Observable.throw(error.statusText);
     }*/

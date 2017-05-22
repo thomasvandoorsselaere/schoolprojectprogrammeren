@@ -11,10 +11,16 @@ import { BookService } from '../shared/books.service';
 })
 export class OverviewComponent implements OnInit {
   books: IBook[];
+  isbn: string;
 
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.books = this.route.snapshot.data['books'];
   }
+
+    getBookDetails(){
+     this.books.push(this.bookService.getDetails(this.isbn))
+  }
+
 }
