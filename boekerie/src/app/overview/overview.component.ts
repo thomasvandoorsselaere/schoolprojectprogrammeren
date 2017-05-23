@@ -17,11 +17,7 @@ export class OverviewComponent implements OnInit {
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.forEach((data) => {
-      this.books.push(data['books']);
-    });
-    console.log (this.books);
-    console.log (this.books[0].cover);
+    this.bookService.getBooks().subscribe((data) => { this.books = data; });
 
     //this.books = this.route.snapshot.data['books']; // dit deel werkt voor eigen mocked data
   }

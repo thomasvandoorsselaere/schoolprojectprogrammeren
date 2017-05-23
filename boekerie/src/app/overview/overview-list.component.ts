@@ -18,6 +18,7 @@ export class OverviewListComponent implements OnChanges, Input {
 
  ngOnChanges() {
     if (this.books) {
+      this.zichtbareBooks = this.books;
       // this.filterSessions(this.filterBy);
       this.sortBy === 'titel' ? this.zichtbareBooks.sort(sorteerOpTitelAsc) : this.zichtbareBooks.sort(sorteerOpAuteurAsc);
     }
