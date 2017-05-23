@@ -1,3 +1,54 @@
-<p>
-  create works!
-</p>
+<h1>Nieuwe Boek</h1>
+<hr>
+<div class="col-md-6">
+  <form #newBookForm="ngForm" (ngSubmit)="saveBook(newBookForm.value)" autocomplete="off" novaliauthor>
+    <div class="form-group" [ngClass]="{'error': newBookForm.controls.name?.invalid && newBookForm.controls.name?.touched}">
+      <label for="bookTitle">Titel:</label>
+      <em *ngIf="newBookForm.controls.name?.invalid && (newBookForm.controls.name?.touched)">Required</em>
+      <input (ngModel)="name" name="name" required id="name" type="text" class="form-control" placeholder="Geef de titel van je boek" />
+    </div>
+    <div class="form-group" [ngClass]="{'error': newBookForm.controls.author?.invalid && newBookForm.controls.author?.touched}">
+      <label for="bookAuthor">Auteur:</label>
+      <em *ngIf="newBookForm.controls.author?.invalid && (newBookForm.controls.author?.touched)">Required</em>
+      <input (ngModel)="author" name="author" required id="bookAuthor" type="text" class="form-control" placeholder="Geeft de auteur" />
+    </div>
+    <div class="form-group" [ngClass]="{'error': newBookForm.controls.isbn?.invalid && newBookForm.controls.isbn?.touched}">
+      <label for="bookIsbn">ISBN:</label>
+      <em *ngIf="newBookForm.controls.isbn?.invalid && (newBookForm.controls.isbn?.touched)">Required</em>
+      <input (ngModel)="isbn" name="isbn" required id="bookIsbn" type="text" class="form-control" placeholder="Geef de ISBN nummer" />
+    </div>
+    <div class="form-group" [ngClass]="{'error': newBookForm.controls.genre?.invalid && newBookForm.controls.genre?.touched}">
+      <label for="bookgenre">Genre:</label>
+      <em *ngIf="newBookForm.controls.genre?.invalid && (newBookForm.controls.genre?.touched)">Required</em>
+      <input (ngModel)="genre" name="genre" required id="bookgenre" type="text" class="form-control" placeholder="Geef de genres" />
+    </div>
+     <div class="form-group" [ngClass]="{'error': newBookForm.controls.tags?.invalid && newBookForm.controls.tags?.touched}">
+      <label for="bookTags">Tags:</label>
+      <em *ngIf="newBookForm.controls.tags?.invalid && (newBookForm.controls.tags?.touched)">Required</em>
+      <input (ngModel)="tags" name="tags" required id="bookTags" type="text" class="form-control" placeholder="Geef tags" />
+    </div>
+
+       
+    <div class="form-group">
+      <label for="uitgegeven">Uitgegeven:</label>
+      <input  type="text" class="form-control" name="uitgegeven" type="number" placeholder="Geef uitgave jaar" />
+    </div>
+  
+
+    <div class="form-group">
+      <label for="price">Prijs:</label>
+      <input name="price"  type="number" class="form-control"  placeholder="Geef de prijs" />
+    </div>
+    
+    <div class="form-group" [ngClass]="{'error': newBookForm.controls.imageUrl?.invalid && newBookForm.controls.imageUrl?.touched}">
+      <label for="imageUrl">Cover:</label>
+      <em *ngIf="newBookForm.controls.imageUrl?.invalid && newBookForm.controls.imageUrl?.touched && newBookForm.controls.imageUrl?.errors.required">Required</em>
+      <em *ngIf="newBookForm.controls.imageUrl?.invalid && newBookForm.controls.imageUrl?.touched  && newBookForm.controls.imageUrl?.errors.pattern">Must be a png or jpg url</em>
+      <input (ngModel)="imageUrl" name="imageUrl" required pattern=".*\/.*.(png|jpg)" id="imageUrl" type="text" class="form-control" placeholder="url of image..." />
+      <img [src]="newBookForm.controls.imageUrl.value" *ngIf="newBookForm.controls.imageUrl?.valid"/>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" [disabled]="newBookForm.invalid" class="btn btn-default" (click)="cancel()">Cancel</button>
+  </form>
+</div>

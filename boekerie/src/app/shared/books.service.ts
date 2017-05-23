@@ -7,15 +7,20 @@ import { IBook } from './books.model';
 @Injectable()
 export class BookService {
   books: IBook[] = BOOKS;
+  url: string = 'http://apis.dirkandries.be/api';
   constructor(private http: Http) {
   }
 /*  getBooks(): Observable<IBook[]> {
-    return this.http.get('/api/books').map((response: Response) => {
+    return this.http.get(url+'/books').map((response: Response) => {
       return <IBook[]>response.json();
     }).catch(this.handleError);
   }*/
   getBooks() {
     return this.books;
+  }
+
+  getDetails(isbn){
+    return this.getBooks().find(i => i.isbn === isbn);
   }
  /* private handleError(error: Response) {
       return Observable.throw(error.statusText);
