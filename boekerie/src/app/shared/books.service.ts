@@ -6,78 +6,161 @@ import { IBook } from './books.model';
 
 @Injectable()
 export class BookService {
-  books: IBook[] = BOOKS;
-  url: string = 'http://apis.dirkandries.be/api';
+  url = 'http://apis.dirkandries.be/api/boeken';
   constructor(private http: Http) {
   }
-/*  getBooks(): Observable<IBook[]> {
-    return this.http.get(url+'/books').map((response: Response) => {
+  getBooks(): Observable<IBook[]> {
+    return this.http.get(this.url).map((response: Response) => {
       return <IBook[]>response.json();
     }).catch(this.handleError);
-  }*/
+  }
+
+  getDetails(isbn): Observable<IBook[]> {
+      return this.http.get(this.url).map((response: Response) => {
+      return <IBook[]>response.json().find(i => i.isbn === isbn);
+    }).catch(this.handleError);
+  }
+  private handleError(error: Response) {
+      return Observable.throw(error.statusText);
+    }
+
+
+
+  // indien mock nodig is (a.k.a. API-offline-toestanden), geeft onderstaande redding
+  /* books: IBook[] = BOOKS;
   getBooks() {
     return this.books;
   }
 
-  getDetails(isbn){
+  getDetails(isbn) {
     return this.getBooks().find(i => i.isbn === isbn);
-  }
- /* private handleError(error: Response) {
-      return Observable.throw(error.statusText);
-    }*/
+  }*/
+
 }
 
 
 const BOOKS: IBook[] = [
   {
-    isbn: '978-0-00-744803-6',
+    isbn: '9780007448036',
     titel: 'A Song Of Ice And Fire: A Game Of Thrones',
-    genre: {
-      id: 1,
-      naam: 'Roman'
-    },
     auteur: {
         id: 1,
-        naam: 'George R. R. Martin'
+        naam: 'George R. R. Martin',
+        links: [{
+          'href': 'http://apis.dirkandries.be/api/Auteurs/1',
+          'rel': 'get_auteur',
+          'method': 'GET'
+        }]
     },
-    cover: 'http://www.isfdb.org/wiki/images/d/d2/GMFTHRNSDD0000.jpg',
+    genre: {
+      id: 1,
+      naam: 'Roman',
+      links: [{
+        href: 'http://apis.dirkandries.be/api/Genres/1',
+        rel: 'get_genre',
+        method: 'GET'
+      }]
+    },
     uitgegeven: 1996,
-    prijs: 24.99,
+    cover: 'http://www.isfdb.org/wiki/images/d/d2/GMFTHRNSDD0000.jpg',
+    sterren: 5,
     tags: ['Oorlog', 'Complot', 'Tieten', 'Fantasy', 'Ridders, jonkvrouwen en draken'],
-    sterren: 5
+    links: [{
+      href: 'books/9780007448036',
+      rel: 'self',
+      method: 'GET'
+    },
+    {
+      href: 'books/9780007448036',
+      rel: 'update_boek',
+      method: 'PUT'
+    },
+    {
+      href: 'books/9780007448036',
+      rel: 'delete_boek',
+      method: 'DELETE'
+    }]
   },
   {
-    isbn: '90-245-5705-4',
+    isbn: '9024557054',
     titel: 'The Da Vinci Code',
-    genre: {
-      id: 2,
-      naam: 'Fictie'
-    },
     auteur: {
         id: 2,
-        naam: 'Dan Brown'
+        naam: 'Dan Brown',
+        links: [{
+          'href': 'http://apis.dirkandries.be/api/Auteurs/1',
+          'rel': 'get_auteur',
+          'method': 'GET'
+        }]
     },
-    cover: 'https://s.s-bol.com/imgbase0/imagebase3/large/FC/6/8/8/1/1001004002781886.jpg',
+    genre: {
+      id: 2,
+      naam: 'Fictie',
+      links: [{
+        'href': 'http://apis.dirkandries.be/api/Genres/1',
+        'rel': 'get_genre',
+        'method': 'GET'
+      }]
+    },
     uitgegeven: 2004,
-    prijs: 15.99,
+    cover: 'https://s.s-bol.com/imgbase0/imagebase3/large/FC/6/8/8/1/1001004002781886.jpg',
+    sterren: 4,
     tags: ['Religie', 'Complot', 'Thriller', 'Misdaad', 'Tempeliers', 'Mysterie'],
-    sterren: 4
+    links: [{
+      href: 'books/9024557054',
+      rel: 'self',
+      method: 'GET'
+    },
+    {
+      href: 'books/9024557054',
+      rel: 'update_boek',
+      method: 'PUT'
+    },
+    {
+      href: 'books/9024557054',
+      rel: 'delete_boek',
+      method: 'DELETE'
+    }]
   },
   {
-    isbn: '978-90-257-4377-2',
+    isbn: '9789025743772',
     titel: 'Trekking in Zweden',
-    genre: {
-      id: 3,
-      naam: 'Documentaire'
-    },
     auteur: {
         id: 3,
-        naam: 'Sander Van Der Werf'
+        naam: 'Sander Van Der Werf',
+        links: [
+          {'href': 'http://apis.dirkandries.be/api/Auteurs/1',
+          'rel': 'get_auteur',
+          'method': 'GET'
+        }]
     },
-    cover: 'https://s.s-bol.com/imgbase0/imagebase3/large/FC/5/6/0/1/1001004006421065.jpg',
+    genre: {
+      id: 3,
+      naam: 'Documentaire',
+      links: [{
+        'href': 'http://apis.dirkandries.be/api/Genres/1',
+        'rel': 'get_genre',
+        'method': 'GET'
+      }]
+    },
     uitgegeven: 2009,
-    prijs: 21.50,
+    cover: 'https://s.s-bol.com/imgbase0/imagebase3/large/FC/5/6/0/1/1001004006421065.jpg',
+    sterren: 5,
     tags: ['Trekken', 'Camperen', 'Zweden', 'Survival'],
-    sterren: 5
+    links: [{
+      href: 'books/9789025743772',
+      rel: 'self',
+      method: 'GET'
+    },
+    {
+      href: 'books/9789025743772',
+      rel: 'update_boek',
+      method: 'PUT'
+    },
+    {
+      href: 'books/9789025743772',
+      rel: 'delete_boek',
+      method: 'DELETE'
+    }]
   }
 ];

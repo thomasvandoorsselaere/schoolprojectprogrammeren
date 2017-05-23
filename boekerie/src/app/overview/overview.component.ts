@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IBook, IGenre, IAuteur } from '../shared/index';
@@ -10,17 +10,20 @@ import { BookService } from '../shared/books.service';
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit {
-  books: IBook[];
-  isbn: string;
+  books: IBook[] = [];
+  filterBy = 'all';
+  sortBy = 'titel';
 
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.books = this.route.snapshot.data['books'];
-  }
+    this.route.data.forEach((data) => {
+      this.books.push(data['books']);
+    });
+    console.log (this.books);
+    console.log (this.books[0].cover);
 
-    getBookDetails(){
-     this.books.push(this.bookService.getDetails(this.isbn))
+    //this.books = this.route.snapshot.data['books']; // dit deel werkt voor eigen mocked data
   }
 
 }

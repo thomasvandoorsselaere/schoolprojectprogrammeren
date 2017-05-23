@@ -1,39 +1,8 @@
-
 <hr>
-<div class="container-fluid" *ngFor="let book of books">
-  <div class="row">
-    <app-collapsible-well>
-      <div well-title>
-        "{{ book.titel }}" by {{ book.auteur.naam }}
+      <div class="btn-group btn-group-sm" style="margin: 0px 20px;">
+          <button class="btn btn-default" [class.active]="sortBy==='titel'" (click)="sortBy='titel'">By titel</button>
+          <button class="btn btn-default" [class.active]="sortBy==='auteur'" (click)="sortBy='auteur'">By auteur</button>
       </div>
-      <div well-body>
-        <div class="row">
-          <div class="col-md-3">
-            <span>
-              <img class="img-rounded" height="250px" src="{{ book.cover }}"/>
-            </span>
-          </div>
-          <div class="col-md-9">
-              <span class="genre">
-                <h4>Genre:</h4>
-                <p>{{ book.genre.naam }}</p>
-              </span>
-                <span>
-                <h4>Tags:</h4>
-                  <div *ngFor="let tag of book.tags" class="badge">
-                    <span aria-hidden="true" class="glyphicon glyphicon-tag"></span>&nbsp;{{ tag | uppercase }}
-                  </div>
-              </span>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <span class="detailsbtn">
-                  <button type="button" class="btn btn-primary btn-lg btn-block" [routerLink]="['/details', book.isbn]" >Naar details</button>
-                </span>
-              </div>
-            </div>
-        </div>
-      </div>       
-    </app-collapsible-well>
-  </div>
-</div>
+<hr>
+<div *ngFor="let book of books">{{book.titel}} bla</div>
+<app-overview-list [books]="books" [sortBy]="sortBy" [filterBy]="filterBy"></app-overview-list>
