@@ -4,4 +4,21 @@
         <h2>{{book.titel | uppercase}} </h2>
       </div>
     </div>
+
+      <div class="row">
+    <div class="col-md-6">
+      <div><strong>Isbn: </strong> {{book.isbn}}</div>
+      <div><strong>Uitgegeven: </strong> {{book.uitgegeven}}</div>
+    </div>
+    <div class="col-md-6">
+      <div><strong>Auteur: </strong>{{book.auteur.naam}}</div>
+      <div><strong>Genre: </strong>{{book.genre.naam}}</div>
+      <div><strong>Tags: </strong>{{book.tags}}</div>
+    </div>
+  </div>
+  <hr>
+    <span>
+       <img class="img-rounded" height="250px" src="{{ book.cover }}"/>
+
+    </span>
   </div>
