@@ -1,14 +1,14 @@
 import { IGenre } from './genre.model';
 import { IAuteur } from './auteur.model';
-
+import { ILink } from './links.model';
 export interface IBook {
     isbn: string;
     titel: string;
-    genre: IGenre;
     auteur: IAuteur;
-    cover?: string;
+    genre: IGenre;
     uitgegeven: number;
-    prijs: number;
-    tags: string[];
+    cover: string;
     sterren: number;
+    tags: string[];
+    links: ILink[];
 }

@@ -16,9 +16,9 @@ import {
  } from './common/index';
 import { BookService } from './shared/books.service';
 import { BooksResolver } from './books-resolver.service';
-import { ValutaPipe } from './shared/valuta.pipe';
 import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
-import { DetailsResolver } from "app/details/books-details-resolver.service";
+import { DetailsResolver } from 'app/details/books-details-resolver.service';
+import { OverviewListComponent } from './overview/overview-list.component';
 
 
 @NgModule({
@@ -29,8 +29,8 @@ import { DetailsResolver } from "app/details/books-details-resolver.service";
     CreateComponent,
     DetailsComponent,
     CollapsibleWellComponent,
-    ValutaPipe,
-    UitgaveJaarPipe
+    UitgaveJaarPipe,
+    OverviewListComponent
   ],
   imports: [
     BrowserModule,
