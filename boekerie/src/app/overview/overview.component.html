@@ -1,9 +1,10 @@
 <hr>
       <div class="btn-group btn-group-sm" style="margin: 0px 20px;">
-          <button class="btn btn-default" [class.active]="sortBy==='titel'" (click)="sortBy='titel'">By titel</button>
-          <button class="btn btn-default" [class.active]="sortBy==='auteur'" (click)="sortBy='auteur'">By auteur</button>
+          <button class="btn btn-default" [class.active]="sortBy==='titel'" (click)="sort('titel')">
+              Op titel&nbsp;<span *ngIf="sortBy==='titel'" class="glyphicon glyphicon-chevron-{{sortMethod}}"></span>
+          </button>
+          <button class="btn btn-default" [class.active]="sortBy==='auteur'" (click)="sort('auteur')">Op auteur <span *ngIf="sortBy==='auteur'" class="glyphicon glyphicon-chevron-{{sortMethod}}"></span></button>
       </div>
 <hr>
-<div *ngFor="let book of books">{{book.titel}} bla</div>
 <app-overview-list [books]="books" [sortBy]="sortBy" [filterBy]="filterBy"></app-overview-list>
 

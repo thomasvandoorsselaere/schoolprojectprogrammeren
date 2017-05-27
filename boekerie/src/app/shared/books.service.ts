@@ -7,9 +7,9 @@ import { IBook } from './books.model';
 @Injectable()
 export class BookService {
   url = 'http://apis.dirkandries.be/api/boeken';
-  constructor(private http: Http) {
-  }
-  getBooks(): Observable<IBook[]> {
+  /*constructor(private http: Http) {
+  }*/
+  /*getBooks(): Observable<IBook[]> {
     return this.http.get(this.url).map((response: Response) => {
       console.log(<IBook[]>response.json().value);
       return <IBook[]>response.json().value;
@@ -23,22 +23,77 @@ export class BookService {
   }
   private handleError(error: Response) {
       return Observable.throw(error.statusText);
-    }
+    }*/
 
 
 
-  // indien mock nodig is (a.k.a. API-offline-toestanden), geeft onderstaande redding
-  /* books: IBook[] = BOOKS;
+  // indien mock nodig is (a.k.a. API-offline-toestanden), geeft onderstaande redding (alle bovenstaande zaken mogen in commentaar, overview.component.ts moet ook nog aangepast worden ifv mock)
+   books: IBook[] = BOOKS;
+  constructor(private http: Http) {
+  }
   getBooks() {
     return this.books;
   }
 
   getDetails(isbn) {
     return this.getBooks().find(i => i.isbn === isbn);
-  }*/
+  }
 
+
+  sorteerOpTitelDesc(b1: IBook, b2: IBook) {
+      if (b1.titel > b2.titel) {
+        return 1;
+      } else if (b1.titel === b2.titel) {
+        return 0;
+      } else {
+        return -1;
+      };
+  }
+
+  sorteerOpAuteurDesc(b1: IBook, b2: IBook) {
+        if (b1.auteur.naam > b2.auteur.naam) {
+        return 1;
+      } else if (b1.auteur.naam === b2.auteur.naam) {
+        return 0;
+      } else {
+        return -1;
+      };
+  }
+  sorteerOpTitelAsc(b1: IBook, b2: IBook) {
+      if (b1.titel < b2.titel) {
+        return 1;
+      } else if (b1.titel === b2.titel) {
+        return 0;
+      } else {
+        return -1;
+      };
+  }
+
+  sorteerOpAuteurAsc(b1: IBook, b2: IBook) {
+        if (b1.auteur.naam < b2.auteur.naam) {
+        return 1;
+      } else if (b1.auteur.naam === b2.auteur.naam) {
+        return 0;
+      } else {
+        return -1;
+      };
+  }
+  sort(books, sortBy, sortMethod) {
+    if (sortBy === 'titel') {
+      if (sortMethod === 'up') {
+        books.sort(this.sorteerOpTitelAsc);
+      } else {
+        books.sort(this.sorteerOpTitelDesc);
+      }
+    } else {
+      if (sortMethod === 'up') {
+        books.sort(this.sorteerOpAuteurAsc);
+      } else {
+        books.sort(this.sorteerOpAuteurDesc);
+      }
+    }
+  }
 }
-
 
 const BOOKS: IBook[] = [
   {
