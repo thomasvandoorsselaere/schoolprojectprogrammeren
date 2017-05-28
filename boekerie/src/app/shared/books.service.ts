@@ -1,5 +1,5 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/RX';
 
 import { IBook } from './books.model';
@@ -7,11 +7,12 @@ import { IBook } from './books.model';
 @Injectable()
 export class BookService {
   url = 'http://apis.dirkandries.be/api/boeken';
-  /*constructor(private http: Http) {
-  }*/
-  /*getBooks(): Observable<IBook[]> {
+  books: IBook[];
+  params = new URLSearchParams();
+  constructor(private http: Http) {
+  }
+  getBooks(): Observable<IBook[]> {
     return this.http.get(this.url).map((response: Response) => {
-      console.log(<IBook[]>response.json().value);
       return <IBook[]>response.json().value;
     }).catch(this.handleError);
   }
@@ -23,12 +24,32 @@ export class BookService {
   }
   private handleError(error: Response) {
       return Observable.throw(error.statusText);
-    }*/
+    }
+/*  getFilteredBooks(auteur, genre, titel) {
+    return this.http.get(this.url + '?auteur=${auteur}&genre=${genre}&titel=${titel}').map((response: Response) => {
+      return <IBook[]>response.json().value;
+    }).catch(this.handleError);;
+  }
+*/
+  getFilteredBooks(auteur, genre, titel) {
+    if (auteur) {
+      this.params.set('auteur', auteur);
+    }
+    if (genre) {
+      this.params.set('genre', genre);
+    }
+    if (titel) {
+      this.params.set('titel', titel);
+    }
 
-
+    return this.http.get(this.url, {search: this.params})
+     .map((response: Response) => {
+      return <IBook[]>response.json().value;
+    }).catch(this.handleError);
+  }
 
   // indien mock nodig is (a.k.a. API-offline-toestanden), geeft onderstaande redding (alle bovenstaande zaken mogen in commentaar, overview.component.ts moet ook nog aangepast worden ifv mock)
-   books: IBook[] = BOOKS;
+  /* books: IBook[] = BOOKS;
   constructor(private http: Http) {
   }
   getBooks() {
@@ -38,7 +59,8 @@ export class BookService {
   getDetails(isbn) {
     return this.getBooks().find(i => i.isbn === isbn);
   }
-
+*/
+// einde mock
 
   sorteerOpTitelDesc(b1: IBook, b2: IBook) {
       if (b1.titel > b2.titel) {
@@ -95,6 +117,8 @@ export class BookService {
   }
 }
 
+
+//Data voor mock
 const BOOKS: IBook[] = [
   {
     isbn: '9780007448036',

@@ -17,10 +17,6 @@ export class DetailsComponent implements OnInit {
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-
      this.book = this.route.snapshot.data['details'];
   }
-
-
-
 }

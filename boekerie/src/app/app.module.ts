@@ -15,10 +15,12 @@ import {
    CollapsibleWellComponent
  } from './common/index';
 import { BookService } from './shared/books.service';
+import { AuteursService } from './shared/auteurs.service';
+import { GenresService } from './shared/genres.service';
 import { BooksResolver } from './books-resolver.service';
-import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
 import { DetailsResolver } from 'app/details/books-details-resolver.service';
 import { OverviewListComponent } from './overview/overview-list.component';
+import { UitgaveJaarPipe } from './shared/index';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { OverviewListComponent } from './overview/overview-list.component';
   providers: [
     BookService,
     BooksResolver,
+    AuteursService,
+    GenresService,
     DetailsResolver
   ],
   bootstrap: [AppComponent]

@@ -12,29 +12,12 @@ import { BookService } from '../shared/books.service';
 export class OverviewListComponent implements OnChanges, Input {
   zichtbareBooks: IBook[] = [];
   @Input() books: IBook[];
-  @Input() filterBy = 'all';
-  @Input() sortBy = 'titelUp';
-  @Input() sortMethod = 'up';
   constructor() { }
 
  ngOnChanges() {
     if (this.books) {
       this.zichtbareBooks = this.books;
-      // this.filterSessions(this.filterBy);
-
-
     }
   }
-
-/*  filterSessions(filter) {
-          if (filter === 'all'){
-              this.zichtbareBooks = this.books.slice(0);
-          } else {
-              this.zichtbareBooks = this.books.filter(book => {
-                  return book.titel.toLocaleLowerCase() === filter;
-              });
-          }
-      }*/
-
 }
 
