@@ -20,7 +20,7 @@ import { GenresService } from './shared/genres.service';
 import { BooksResolver } from './books-resolver.service';
 import { DetailsResolver } from 'app/details/books-details-resolver.service';
 import { OverviewListComponent } from './overview/overview-list.component';
-import { UitgaveJaarPipe } from './shared/index';
+import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
 
 
 @NgModule({

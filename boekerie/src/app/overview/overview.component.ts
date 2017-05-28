@@ -49,7 +49,11 @@ export class OverviewComponent implements OnInit {
      const auteur = this.selectedAuteur ? this.selectedAuteur.naam : undefined;
      const genre = this.selectedGenre ? this.selectedGenre.naam : undefined;
      const titel = this.selectedTitel ? this.selectedTitel.titel : undefined;
-     this.bookService.getFilteredBooks(auteur, genre, titel).subscribe((data) => { this.books = data; });
+     if (auteur === undefined && genre === undefined && titel === undefined){
+       this.bookService.getBooks().subscribe((data) => { this.books = data; });
+     } else {
+       this.bookService.getFilteredBooks(auteur, genre, titel).subscribe((data) => { this.books = data; });
+     }
   }
     toggleSortMethod() {
       if (this.sortMethod === 'up') {
