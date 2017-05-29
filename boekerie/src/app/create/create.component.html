@@ -33,12 +33,6 @@
       <label for="uitgegeven">Uitgegeven:</label>
       <input  type="text" class="form-control" name="uitgegeven" type="number" placeholder="Geef uitgave jaar" />
     </div>
-  
-
-    <div class="form-group">
-      <label for="price">Prijs:</label>
-      <input name="price"  type="number" class="form-control"  placeholder="Geef de prijs" />
-    </div>
     
     <div class="form-group" [ngClass]="{'error': newBookForm.controls.imageUrl?.invalid && newBookForm.controls.imageUrl?.touched}">
       <label for="imageUrl">Cover:</label>

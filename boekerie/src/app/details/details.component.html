@@ -12,8 +12,14 @@
     </div>
     <div class="col-md-6">
       <div><strong>Auteur: </strong>{{book.auteur.naam}}</div>
+      <button type="button" class="btn btn-info">Voeg auteur toe</button>
       <div><strong>Genre: </strong>{{book.genre.naam}}</div>
-      <div><strong>Tags: </strong>{{book.tags}}</div>
+      <button type="button" class="btn btn-info">Voeg genre toe</button>
+      <br>
+      <strong>Tags: </strong>
+      <div *ngFor="let tag of book.tags" class="badge">
+            <span aria-hidden="true" class="glyphicon glyphicon-tag"></span>&nbsp;{{ tag | uppercase }}
+      </div>
     </div>
   </div>
   <hr>
