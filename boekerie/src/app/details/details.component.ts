@@ -12,7 +12,6 @@ import { BookService } from '../shared/books.service';
 export class DetailsComponent implements OnInit {
 
    book: IBook;
-   isbn: string;
 
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 

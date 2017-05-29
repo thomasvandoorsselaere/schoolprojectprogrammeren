@@ -55,6 +55,12 @@ export class OverviewComponent implements OnInit {
        this.bookService.getFilteredBooks(auteur, genre, titel).subscribe((data) => { this.books = data; });
      }
   }
+  filterReset() {
+    this.selectedAuteur = undefined;
+    this.selectedGenre = undefined;
+    this.selectedTitel = undefined;
+    this.bookService.getBooks().subscribe((data) => { this.books = data; });
+  }
     toggleSortMethod() {
       if (this.sortMethod === 'up') {
         this.sortMethod = 'down';
@@ -63,3 +69,6 @@ export class OverviewComponent implements OnInit {
       }
     }
   }
+
+
+
