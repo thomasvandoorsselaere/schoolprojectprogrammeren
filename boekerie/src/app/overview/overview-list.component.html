@@ -22,6 +22,10 @@
                     <span aria-hidden="true" class="glyphicon glyphicon-tag"></span>&nbsp;{{ tag | uppercase }}
                   </div>
               </span>
+              <span>
+                <h4>Rating:</h4>
+                <star-rating-comp[staticColor]="'positive'" [starType]="'svg'" [rating]="book.sterren"></star-rating-comp>
+              </span>
             </div>
             <div class="row">
               <div class="col-md-3">

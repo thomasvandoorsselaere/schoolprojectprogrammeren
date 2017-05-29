@@ -21,7 +21,7 @@ import { BooksResolver } from './books-resolver.service';
 import { DetailsResolver } from 'app/details/books-details-resolver.service';
 import { OverviewListComponent } from './overview/overview-list.component';
 import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
-
+import { StarRatingModule } from 'angular-star-rating';
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
   imports: [
     BrowserModule,
     FormsModule,
+    StarRatingModule,
     HttpModule,
     AlertModule.forRoot(),
     RouterModule.forRoot(routes)

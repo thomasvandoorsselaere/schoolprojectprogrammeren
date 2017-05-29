@@ -23,8 +23,14 @@
     </div>
   </div>
   <hr>
+  <div class="col-md-3">
     <span>
        <img class="img-rounded" height="250px" src="{{ book.cover }}"/>
-
     </span>
   </div>
+  <div class="col-md-3">
+    <span>
+      <star-rating-comp [staticColor]="'positive'" [starType]="'svg'" [rating]="book.sterren"></star-rating-comp>
+    </span>
+  </div>
+</div>
