@@ -20,8 +20,8 @@ export class GenresService {
     }
   // expliciete cast naar number is nodig in onderstaande find-methode. Why? Dunno, but it does not work without and it works with... ;)
   getGenreDetails(id): Observable<IGenre[]> {
-    return this.http.get(this.url).map((response: Response) => {
-      return <IGenre[]>response.json().value.find(g => g.id === +id);
+    return this.http.get(`${this.url}/${id}`).map((response: Response) => {
+      return <IGenre[]>response.json();
     }).catch(this.handleError);
   }
 }
