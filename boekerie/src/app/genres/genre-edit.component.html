@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <h1>Wijzigen van genre: "{{genre.naam}}"</h1><hr>
+    <form #editGenreForm="ngForm" (ngSubmit)="saveGenre(editGenreForm.value)" autocomplete="on">
+        <div class="form-group" [ngClass]="{'error': editGenreForm.controls.name?.invalid && editGenreForm.controls.name?.touched}">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="genreNaam">Nieuwe naam genre:</label>
+                </div>
+                <div class="col-md-3">
+                    <em *ngIf="editGenreForm.controls.name?.invalid && (editGenreForm.controls.name?.touched)">Required</em>
+                    <input (ngModel)="name" name="genreNaam" required id="genreNaam" type="text" class="form-control" placeholder="{{genre.naam}}" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

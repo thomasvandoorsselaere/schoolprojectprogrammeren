@@ -10,7 +10,5 @@ export class BooksResolver implements Resolve<any> {
   resolve() {
     return this.bookService.getBooks();
   }
-
-
 }
 

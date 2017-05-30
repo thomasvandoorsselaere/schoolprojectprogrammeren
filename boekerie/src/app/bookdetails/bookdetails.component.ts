@@ -5,17 +5,17 @@ import { IBook, IGenre, IAuteur } from '../shared/index';
 import { BookService } from '../shared/books.service';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  selector: 'app-bookdetails',
+  templateUrl: './bookdetails.component.html',
+  styleUrls: ['./bookdetails.component.css']
 })
-export class DetailsComponent implements OnInit {
+export class BookDetailsComponent implements OnInit {
 
    book: IBook;
 
   constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-     this.book = this.route.snapshot.data['details'];
+     this.book = this.route.snapshot.data['bookdetails'];
   }
 }

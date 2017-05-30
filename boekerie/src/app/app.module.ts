@@ -4,24 +4,38 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { AlertModule } from 'ngx-bootstrap';
+import { StarRatingModule } from 'angular-star-rating';
 
+// Routing
 import { routes } from './routing';
+
+ // Components
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { OverviewComponent } from './overview/overview.component';
+import { OverviewListComponent } from './overview/overview-list.component';
 import { CreateComponent } from './create/create.component';
-import { DetailsComponent } from './details/details.component';
+import { BookDetailsComponent } from './bookdetails/bookdetails.component';
+import { GenresComponent, GenreEditComponent } from './genres/index';
+import { AuteursComponent, AuteurDetailsComponent } from './auteurs/index';
 import {
    CollapsibleWellComponent
  } from './common/index';
+
+// Services
 import { BookService } from './shared/books.service';
-import { AuteursService } from './shared/auteurs.service';
-import { GenresService } from './shared/genres.service';
 import { BooksResolver } from './books-resolver.service';
-import { DetailsResolver } from 'app/details/books-details-resolver.service';
-import { OverviewListComponent } from './overview/overview-list.component';
+import { BookDetailsResolver } from 'app/bookdetails/books-details-resolver.service';
+import { AuteursService } from './shared/auteurs.service';
+import { AuteursResolver } from './auteurs/auteurs-resolver.service';
+import { GenresService } from './shared/genres.service';
+import { GenresResolver } from './genres/genres-resolver.service';
+import { GenreDetailsResolver } from 'app/genres/genre-details-resolver.service';
+import { AuteurDetailsResolver } from 'app/auteurs/auteur-details-resolver.service';
+
+// Pipes
 import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
-import { StarRatingModule } from 'angular-star-rating';
+
 
 @NgModule({
   declarations: [
@@ -29,10 +43,14 @@ import { StarRatingModule } from 'angular-star-rating';
     NavComponent,
     OverviewComponent,
     CreateComponent,
-    DetailsComponent,
+    BookDetailsComponent,
     CollapsibleWellComponent,
     UitgaveJaarPipe,
-    OverviewListComponent
+    OverviewListComponent,
+    GenresComponent,
+    AuteursComponent,
+    GenreEditComponent,
+    AuteurDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -45,9 +63,13 @@ import { StarRatingModule } from 'angular-star-rating';
   providers: [
     BookService,
     BooksResolver,
-    AuteursService,
+    BookDetailsResolver,
     GenresService,
-    DetailsResolver
+    GenresResolver,
+    GenreDetailsResolver,
+    AuteursService,
+    AuteursResolver,
+    AuteurDetailsResolver
   ],
   bootstrap: [AppComponent]
 })

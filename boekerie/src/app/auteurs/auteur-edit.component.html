@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <h1>Wijzigen van auteur: "{{auteur.naam}}"</h1><hr>
+    <form #editAuteurForm="ngForm" (ngSubmit)="saveAuteur(editAuteurForm.value)" autocomplete="on">
+        <div class="form-group" [ngClass]="{'error': editAuteurForm.controls.name?.invalid && editAuteurForm.controls.name?.touched}">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="auteurNaam">Nieuwe naam auteur:</label>
+                </div>
+                <div class="col-md-3">
+                    <em *ngIf="editAuteurForm.controls.name?.invalid && (editAuteurForm.controls.name?.touched)">Required</em>
+                    <input (ngModel)="name" name="auteurNaam" required id="auteurNaam" type="text" class="form-control" placeholder="{{auteur.naam}}" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
