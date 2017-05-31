@@ -18,8 +18,8 @@ export class BookService {
   }
 
   getDetails(isbn): Observable<IBook[]> {
-      return this.http.get(`${this.url}/${isbn}`).map((response: Response) => {
-      return <IBook[]>response.json();
+      return this.http.get(this.url).map((response: Response) => {
+      return <IBook[]>response.json().value.find(i => i.isbn === isbn);
     }).catch(this.handleError);
   }
   private handleError(error: Response) {
