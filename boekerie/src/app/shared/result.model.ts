@@ -1,4 +1,4 @@
-import { ILink, IBook, IGenre, IAuteur } from './index';
+import { ILink } from './index';
 
 export interface IResult<T> {
   value: T[];
