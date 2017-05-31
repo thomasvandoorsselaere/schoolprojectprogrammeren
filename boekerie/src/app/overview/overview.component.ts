@@ -18,9 +18,9 @@ export class OverviewComponent implements OnInit {
   genres: IGenre[] = [];
   sortBy = 'titel';
   sortMethod = 'up';
-  selectedAuteur: IAuteur;
-  selectedGenre: IGenre;
-  selectedTitel: IBook;
+  selectedAuteur: IAuteur = undefined;
+  selectedGenre: IGenre = undefined;
+  selectedTitel: IBook = undefined;
 
   constructor(
     private bookService: BookService,
@@ -30,10 +30,10 @@ export class OverviewComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.bookService.getBooks().subscribe((data) => { this.allBooks = data; });
-    this.bookService.getBooks().subscribe((data) => { this.books = data; });
-    this.auteursService.getAuteurs().subscribe((data) => { this.auteurs = data; });
-    this.genresService.getGenres().subscribe((data) => { this.genres = data; });
+    this.bookService.getBooks().subscribe((data) => { this.allBooks = data.value; });
+    this.bookService.getBooks().subscribe((data) => { this.books = data.value; });
+    this.auteursService.getAuteurs().subscribe(data => this.auteurs = data.value);
+    this.genresService.getGenres().subscribe(data =>  this.genres = data.value );
     // need some mocking?
     /*this.books = this.route.snapshot.data['books'];
     this.books.forEach(b => this.auteurs.push(b.auteur));
@@ -49,17 +49,19 @@ export class OverviewComponent implements OnInit {
      const auteur = this.selectedAuteur ? this.selectedAuteur.naam : undefined;
      const genre = this.selectedGenre ? this.selectedGenre.naam : undefined;
      const titel = this.selectedTitel ? this.selectedTitel.titel : undefined;
-     if (auteur === undefined && genre === undefined && titel === undefined){
-       this.bookService.getBooks().subscribe((data) => { this.books = data; });
+     if (auteur === undefined && genre === undefined && titel === undefined) {
+       this.bookService.getBooks().subscribe((data) => { this.books = data.value; });
      } else {
-       this.bookService.getFilteredBooks(auteur, genre, titel).subscribe((data) => { this.books = data; });
+       this.bookService.getFilteredBooks(auteur, genre, titel).subscribe((data) => {
+         this.books = data.value;
+        });
      }
   }
   filterReset() {
     this.selectedAuteur = undefined;
     this.selectedGenre = undefined;
     this.selectedTitel = undefined;
-    this.bookService.getBooks().subscribe((data) => { this.books = data; });
+    this.bookService.getBooks().subscribe((data) => { this.books = data.value; });
   }
     toggleSortMethod() {
       if (this.sortMethod === 'up') {

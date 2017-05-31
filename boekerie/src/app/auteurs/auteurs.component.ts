@@ -16,7 +16,7 @@ export class AuteursComponent implements OnInit {
   constructor(private auteursService: AuteursService ) { }
 
   ngOnInit() {
-    this.auteursService.getAuteurs().subscribe((data) => {this.auteurs = data; });
+    this.auteursService.getAuteurs().subscribe((data) => {this.auteurs = data.value; });
   }
 
 }

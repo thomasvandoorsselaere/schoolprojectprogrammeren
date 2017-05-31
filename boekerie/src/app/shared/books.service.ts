@@ -2,24 +2,23 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/RX';
 
-import { IBook } from './books.model';
+import { IBook, IResult } from './index';
 
 @Injectable()
 export class BookService {
   url = 'http://apis.dirkandries.be/api/boeken';
-  books: IBook[];
   params = new URLSearchParams();
   constructor(private http: Http) {
   }
-  getBooks(): Observable<IBook[]> {
+  getBooks(): Observable<IResult<IBook>> {
     return this.http.get(this.url).map((response: Response) => {
-      return <IBook[]>response.json().value;
+      return <IResult<IBook>>response.json();
     }).catch(this.handleError);
   }
 
-  getDetails(isbn): Observable<IBook[]> {
+  getDetails(isbn): Observable<IBook> {
       return this.http.get(`${this.url}/${isbn}`).map((response: Response) => {
-      return <IBook[]>response.json();
+      return <IBook>response.json();
     }).catch(this.handleError);
   }
   private handleError(error: Response) {
@@ -31,20 +30,26 @@ export class BookService {
     }).catch(this.handleError);;
   }
 */
-  getFilteredBooks(auteur, genre, titel) {
+  getFilteredBooks(auteur, genre, titel): Observable<IResult<IBook>> {
     if (auteur) {
       this.params.set('auteur', auteur);
+    } else {
+      this.params.delete('auteur');
     }
     if (genre) {
       this.params.set('genre', genre);
+    } else {
+      this.params.delete('genre');
     }
     if (titel) {
       this.params.set('titel', titel);
+    } else {
+      this.params.delete('titel');
     }
 
     return this.http.get(this.url, {search: this.params})
      .map((response: Response) => {
-      return <IBook[]>response.json().value;
+      return <IResult<IBook>>response.json();
     }).catch(this.handleError);
   }
 
