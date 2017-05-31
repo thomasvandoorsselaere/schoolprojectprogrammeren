@@ -11,11 +11,16 @@ import { GenresService } from '../shared/genres.service';
 })
 export class GenreEditComponent implements OnInit {
   genre: IGenre;
+  hasDeleteMethod: boolean;
   constructor(private genresService: GenresService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    let i = 0;
     this.genre = this.route.snapshot.data['genredetails'];
-    console.log(this.genre);
+    // indien manier om simpelweg te breaken in lambda "this.genre.links.forEach" => toepassen! Echter nog niet gevonden/mogelijk :(
+    while (!this.hasDeleteMethod && i < this.genre.links.length) {
+      this.genre.links.forEach(l => l.method !== 'DELETE' ? this.hasDeleteMethod = false : this.hasDeleteMethod = true);
+      i++;
+    };
   }
-
 }

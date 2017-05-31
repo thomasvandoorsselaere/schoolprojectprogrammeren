@@ -1,16 +1,27 @@
 <div class="container-fluid">
     <h1>Wijzigen van genre: "{{genre.naam}}"</h1><hr>
     <form #editGenreForm="ngForm" (ngSubmit)="saveGenre(editGenreForm.value)" autocomplete="on">
-        <div class="form-group" [ngClass]="{'error': editGenreForm.controls.name?.invalid && editGenreForm.controls.name?.touched}">
+        <div class="form-group" [ngClass]="{'error': editGenreForm.controls.genreNaam?.invalid && editGenreForm.controls.genreNaam?.touched}">
             <div class="row">
                 <div class="col-md-2">
                     <label for="genreNaam">Nieuwe naam genre:</label>
                 </div>
                 <div class="col-md-3">
-                    <em *ngIf="editGenreForm.controls.name?.invalid && (editGenreForm.controls.name?.touched)">Required</em>
                     <input (ngModel)="name" name="genreNaam" required id="genreNaam" type="text" class="form-control" placeholder="{{genre.naam}}" />
+                    <!--<em *ngIf="(editGenreForm.controls.genreNaam?.touched)">Required</em>-->
                 </div>
-            </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-success">Wijzig genre</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button [disabled]="!hasDeleteMethod" class="btn btn-danger">Verwijder genre</button><br/>
+                            <em *ngIf="!hasDeleteMethod">Dit genre kan niet verwijderd worden...</em>
+                        </div>
+                    </div>
+                </div>
+            </div>            
         </div>
     </form>
 </div>

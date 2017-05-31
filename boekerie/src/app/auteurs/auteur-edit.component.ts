@@ -11,11 +11,16 @@ import { AuteursService } from '../shared/auteurs.service';
 })
 export class AuteurDetailsComponent implements OnInit {
   auteur: IAuteur;
+  hasDeleteMethod: boolean;
   constructor(private auteursService: AuteursService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    let i = 0;
     this.auteur = this.route.snapshot.data['auteurdetails'];
-    console.log(this.auteur);
+    // indien manier om simpelweg te breaken in lambda "this.genre.links.forEach" => toepassen! Echter nog niet gevonden/mogelijk :(
+    while (!this.hasDeleteMethod && i < this.auteur.links.length) {
+      this.auteur.links.forEach(l => l.method !== 'DELETE' ? this.hasDeleteMethod = false : this.hasDeleteMethod = true);
+      i++;
+    };
   }
-
 }
