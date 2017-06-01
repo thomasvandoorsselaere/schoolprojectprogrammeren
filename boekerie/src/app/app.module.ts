@@ -35,6 +35,7 @@ import { AuteurDetailsResolver } from 'app/auteurs/auteur-details-resolver.servi
 
 // Pipes
 import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
+import { ErrorPageComponent } from './error/error-page.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
     GenresComponent,
     AuteursComponent,
     GenreEditComponent,
-    AuteurDetailsComponent
+    AuteurDetailsComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

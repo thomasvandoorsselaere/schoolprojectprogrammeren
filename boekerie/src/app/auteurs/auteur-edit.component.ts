@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { IAuteur } from '../shared/index';
 import { AuteursService } from '../shared/auteurs.service';
@@ -12,15 +12,18 @@ import { AuteursService } from '../shared/auteurs.service';
 export class AuteurDetailsComponent implements OnInit {
   auteur: IAuteur;
   hasDeleteMethod: boolean;
-  constructor(private auteursService: AuteursService, private route: ActivatedRoute) { }
+  constructor(private auteursService: AuteursService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     let i = 0;
     this.auteur = this.route.snapshot.data['auteurdetails'];
-    // indien manier om simpelweg te breaken in lambda "this.genre.links.forEach" => toepassen! Echter nog niet gevonden/mogelijk :(
+    // indien manier om simpelweg te breaken in lambda "this.auteur.links.forEach" => toepassen! Echter nog niet gevonden/mogelijk :(
     while (!this.hasDeleteMethod && i < this.auteur.links.length) {
-      this.auteur.links.forEach(l => l.method !== 'DELETE' ? this.hasDeleteMethod = false : this.hasDeleteMethod = true);
+      this.auteur.links.forEach(l => l.method === 'DELETE' ? this.hasDeleteMethod = true : this.hasDeleteMethod = false);
       i++;
     };
   }
+  deleteAuteur() {
+      this.auteursService.deleteAuteur(this.auteur).subscribe(r => this.router.navigate(['/']));
+    }
 }

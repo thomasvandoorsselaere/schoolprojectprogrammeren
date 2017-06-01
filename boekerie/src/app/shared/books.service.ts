@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/RX';
-
+import { BaseService } from './base.service';
+import { Router } from '@angular/router';
 import { IBook, IResult } from './index';
 
 @Injectable()
-export class BookService {
+export class BookService extends BaseService {
   url = 'http://apis.dirkandries.be/api/boeken';
   params = new URLSearchParams();
-  constructor(private http: Http) {
+  constructor(private http: Http, private _router: Router) {
+    super(_router);
   }
   getBooks(): Observable<IResult<IBook>> {
     return this.http.get(this.url).map((response: Response) => {
@@ -21,9 +23,7 @@ export class BookService {
       return <IBook>response.json();
     }).catch(this.handleError);
   }
-  private handleError(error: Response) {
-      return Observable.throw(error.statusText);
-    }
+
 /*  getFilteredBooks(auteur, genre, titel) {
     return this.http.get(this.url + '?auteur=${auteur}&genre=${genre}&titel=${titel}').map((response: Response) => {
       return <IBook[]>response.json().value;

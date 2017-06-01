@@ -16,7 +16,7 @@
                             <button class="btn btn-success">Wijzig auteur</button>
                         </div>
                         <div class="col-md-6">
-                            <button [disabled]="!hasDeleteMethod" class="btn btn-danger">Verwijder auteur</button><br/>
+                            <button [disabled]="!hasDeleteMethod" class="btn btn-danger"  type="button" (click)="deleteAuteur()">Verwijder auteur</button><br/>
                             <em *ngIf="!hasDeleteMethod">Deze auteur kan niet verwijderd worden...</em>
                         </div>
                     </div>

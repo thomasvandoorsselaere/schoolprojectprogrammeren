@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/RX';
+import { Router } from '@angular/router';
 
-import { IAuteur, IResult } from './index';
+import { BaseService } from './base.service';
+
+import { IAuteur, IResult, ILink } from './index';
 
 @Injectable()
-export class AuteursService {
+export class AuteursService extends BaseService{
   url = 'http://apis.dirkandries.be/api/auteurs';
-
-  constructor(private http: Http) { }
+  constructor(private http: Http, private _router: Router) {
+    super(_router);
+  }
   getAuteurs(): Observable<IResult<IAuteur>> {
     return this.http.get(this.url).map((response: Response) => {
       // null check omwille van genre met NULL-naam
@@ -17,13 +21,19 @@ export class AuteursService {
       return result;
     }).catch(this.handleError);
   }
-   private handleError(error: Response) {
-      return Observable.throw(error.statusText);
-    }
 
   getAuteurDetails(id): Observable<IAuteur> {
     return this.http.get(`${this.url}/${id}`).map((response: Response) => {
       return <IAuteur>response.json();
     }).catch(this.handleError);
+  }
+  deleteAuteur(auteur: IAuteur) {
+    const link: ILink = auteur.links.find(l => l.method === 'DELETE');
+    if (link === undefined) {
+      this.handleError(<Response>{});
+      return Observable.empty();
+    } else {
+      return this.http.delete(link.href).catch(this.handleError);
+    }
   }
 }

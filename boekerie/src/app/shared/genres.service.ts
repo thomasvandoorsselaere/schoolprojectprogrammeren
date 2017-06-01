@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/RX';
+import { BaseService } from './base.service';
 
-import { IGenre, IResult } from './index';
+import { IGenre, IResult, ILink } from './index';
 
 @Injectable()
-export class GenresService {
+export class GenresService extends BaseService{
   url = 'http://apis.dirkandries.be/api/genres';
-  constructor(private http: Http) {
+  constructor(private http: Http, private _router: Router) {
+    super(_router);
   }
   getGenres(): Observable<IResult<IGenre>> {
     return this.http.get(this.url).map((response: Response) => {
@@ -17,13 +20,20 @@ export class GenresService {
       return result;
     }).catch(this.handleError);
   }
-  private handleError(error: Response) {
-      return Observable.throw(error.statusText);
-    }
-    
+
   getGenreDetails(id): Observable<IGenre> {
     return this.http.get(`${this.url}/${id}`).map((response: Response) => {
       return <IGenre>response.json();
     }).catch(this.handleError);
+  }
+
+  deleteGenre(genre: IGenre) {
+    const link: ILink = genre.links.find(l => l.method === 'DELETE');
+    if (link === undefined) {
+      this.handleError(<Response>{});
+      return Observable.empty();
+    } else {
+      return this.http.delete(link.href).catch(this.handleError);
+    }
   }
 }

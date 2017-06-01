@@ -4,6 +4,8 @@ import { Routes } from '@angular/router';
 import { OverviewComponent } from 'app/overview/overview.component';
 import { BookDetailsComponent } from 'app/bookdetails/bookdetails.component';
 import { CreateComponent } from 'app/create/create.component';
+import { ErrorPageComponent } from './error/error-page.component';
+
 import { BooksResolver } from './books-resolver.service';
 import { BookDetailsResolver } from 'app/bookdetails/books-details-resolver.service';
 import { GenresComponent, GenreEditComponent } from './genres/index';
@@ -21,5 +23,6 @@ export const routes: Routes = [
   { path: 'genres', component: GenresComponent, resolve: {genres: GenresResolver}},
   { path: 'genres/:id', component: GenreEditComponent, resolve: {genredetails: GenreDetailsResolver}},
   { path: 'auteurs', component: AuteursComponent, resolve: {auteurs: AuteursResolver}},
-  { path: 'auteurs/:id', component: AuteurDetailsComponent, resolve: {auteurdetails: AuteurDetailsResolver}}
+  { path: 'auteurs/:id', component: AuteurDetailsComponent, resolve: {auteurdetails: AuteurDetailsResolver}},
+  { path: 'auch', component: ErrorPageComponent}
 ];
