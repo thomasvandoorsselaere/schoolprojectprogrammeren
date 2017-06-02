@@ -10,6 +10,6 @@ export class GenreDetailsResolver implements Resolve<IGenre> {
   constructor(private genresService: GenresService) { }
 
   resolve(route: ActivatedRouteSnapshot) {
-    return this.genresService.getGenreDetails(route.params['id']);
+    return this.genresService.getDetails(route.params['id']);
   }
 }

@@ -21,6 +21,7 @@ import { AuteursComponent, AuteurDetailsComponent } from './auteurs/index';
 import {
    CollapsibleWellComponent
  } from './common/index';
+import { ErrorPageComponent } from './error/error-page.component';
 
 // Services
 import { BookService } from './shared/books.service';
@@ -32,10 +33,11 @@ import { GenresService } from './shared/genres.service';
 import { GenresResolver } from './genres/genres-resolver.service';
 import { GenreDetailsResolver } from 'app/genres/genre-details-resolver.service';
 import { AuteurDetailsResolver } from 'app/auteurs/auteur-details-resolver.service';
+import { BaseService } from 'app/shared/base.service';
 
 // Pipes
 import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
-import { ErrorPageComponent } from './error/error-page.component';
+
 
 
 @NgModule({

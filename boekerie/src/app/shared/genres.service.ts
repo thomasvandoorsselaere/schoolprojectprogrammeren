@@ -9,8 +9,8 @@ import { IGenre, IResult, ILink } from './index';
 @Injectable()
 export class GenresService extends BaseService<IGenre> {
   url = 'http://apis.dirkandries.be/api/genres';
-  constructor(private http: Http, private _router: Router) {
-    super(_router);
+  constructor(private http: Http, private router: Router) {
+    super(router, http);
   }
   getGenres(): Observable<IResult<IGenre>> {
     return this.http.get(this.url).map((response: Response) => {
@@ -21,10 +21,8 @@ export class GenresService extends BaseService<IGenre> {
     }).catch((error) => this.handleError(error));
   }
 
-  getGenreDetails(id): Observable<IGenre> {
-    return this.http.get(`${this.url}/${id}`).map((response: Response) => {
-      return <IGenre>response.json();
-    }).catch((error) => this.handleError(error));
+  getDetails(id: number): Observable<IGenre> {
+    return this.getDetailsBase(this.url, id);
   }
 
   deleteGenre(genre: IGenre) {

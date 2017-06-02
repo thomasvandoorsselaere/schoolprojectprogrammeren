@@ -10,8 +10,8 @@ import { IBook, IResult } from './index';
 export class BookService extends BaseService<IBook> {
   url = 'http://apis.dirkandries.be/api/boeken';
   params = new URLSearchParams();
-  constructor(private http: Http, private _router: Router) {
-    super(_router);
+  constructor(private http: Http, private router: Router) {
+    super(router, http);
   }
   getBooks(): Observable<IResult<IBook>> {
     return this.http.get(this.url).map((response: Response) => {
@@ -19,10 +19,14 @@ export class BookService extends BaseService<IBook> {
     }).catch(this.handleError);
   }
 
-  getDetails(isbn: string): Observable<IBook> {
+/*  getDetails(isbn: string): Observable<IBook> {
     return this.http.get(`${this.url}/${isbn}`).map((response: Response) => {
           return <IBook>response.json();
     }).catch((error) => this.handleError(error));
+  }*/
+
+  getDetails(isbn: string): Observable<IBook> {
+    return this.getDetailsBase(this.url, isbn);
   }
 
 

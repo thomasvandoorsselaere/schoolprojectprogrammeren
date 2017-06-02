@@ -10,8 +10,8 @@ import { IAuteur, IResult, ILink } from './index';
 @Injectable()
 export class AuteursService extends BaseService<IAuteur> {
   url = 'http://apis.dirkandries.be/api/auteurs';
-  constructor(private http: Http, private _router: Router) {
-    super(_router);
+  constructor(private http: Http, private router: Router) {
+    super(router, http);
   }
   getAuteurs(): Observable<IResult<IAuteur>> {
     return this.http.get(this.url).map((response: Response) => {
@@ -22,11 +22,10 @@ export class AuteursService extends BaseService<IAuteur> {
     }).catch((error) => this.handleError(error));
   }
 
-  getAuteurDetails(id): Observable<IAuteur> {
-    return this.http.get(`${this.url}/${id}`).map((response: Response) => {
-      return <IAuteur>response.json();
-    }).catch((error) => this.handleError(error));
+  getDetails(id: number): Observable<IAuteur> {
+    return this.getDetailsBase(this.url, id);
   }
+  
   deleteAuteur(auteur: IAuteur) {
     const link: ILink = auteur.links.find(l => l.method === 'DELETE');
     if (link === undefined) {

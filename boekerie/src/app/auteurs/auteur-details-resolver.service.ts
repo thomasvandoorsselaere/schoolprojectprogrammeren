@@ -9,6 +9,6 @@ export class AuteurDetailsResolver implements Resolve<any> {
   constructor(private auteursService: AuteursService) { }
 
   resolve(route: ActivatedRouteSnapshot) {
-    return this.auteursService.getAuteurDetails(route.params['id']);
+    return this.auteursService.getDetails(route.params['id']);
   }
 }
