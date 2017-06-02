@@ -7,7 +7,7 @@ import { BaseService } from './base.service';
 import { IGenre, IResult, ILink } from './index';
 
 @Injectable()
-export class GenresService extends BaseService{
+export class GenresService extends BaseService<IGenre> {
   url = 'http://apis.dirkandries.be/api/genres';
   constructor(private http: Http, private _router: Router) {
     super(_router);
@@ -18,13 +18,13 @@ export class GenresService extends BaseService{
       // null check omwille van genre met NULL-naam
       result.value = result.value.filter(g => g.naam !== null);
       return result;
-    }).catch(this.handleError);
+    }).catch((error) => this.handleError(error));
   }
 
   getGenreDetails(id): Observable<IGenre> {
     return this.http.get(`${this.url}/${id}`).map((response: Response) => {
       return <IGenre>response.json();
-    }).catch(this.handleError);
+    }).catch((error) => this.handleError(error));
   }
 
   deleteGenre(genre: IGenre) {

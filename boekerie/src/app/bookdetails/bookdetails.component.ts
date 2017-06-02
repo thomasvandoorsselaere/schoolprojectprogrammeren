@@ -13,7 +13,7 @@ export class BookDetailsComponent implements OnInit {
 
    book: IBook;
 
-  constructor(private bookService: BookService, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
      this.book = this.route.snapshot.data['bookdetails'];

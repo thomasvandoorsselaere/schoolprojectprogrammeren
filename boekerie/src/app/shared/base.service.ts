@@ -3,11 +3,19 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { Observable } from 'rxjs/RX';
 import { Router } from '@angular/router';
 
-export class BaseService {
+export class BaseService<T> {
     constructor(private router: Router) {
+
     }
     public handleError(error: Response) {
-    this.router.navigate(['/auch']);
+      console.log("error:", error);
+      console.log("router", this.router);
+      this.router.navigate(['/auch', error.status]);
       return Observable.throw(error.statusText);
     }
+/*    getDetails(url: string, identifier: any): Observable<T> {
+    return this._http.get(`${url}/${identifier}`).map((response: Response) => {
+          return <IBook>response.json();
+    }).catch((error) => this.handleError(error));
+  }*/
 }

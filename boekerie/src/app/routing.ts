@@ -24,5 +24,6 @@ export const routes: Routes = [
   { path: 'genres/:id', component: GenreEditComponent, resolve: {genredetails: GenreDetailsResolver}},
   { path: 'auteurs', component: AuteursComponent, resolve: {auteurs: AuteursResolver}},
   { path: 'auteurs/:id', component: AuteurDetailsComponent, resolve: {auteurdetails: AuteurDetailsResolver}},
+  { path: 'auch/:status', component: ErrorPageComponent},
   { path: 'auch', component: ErrorPageComponent}
 ];

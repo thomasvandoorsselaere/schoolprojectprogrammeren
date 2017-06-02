@@ -8,7 +8,7 @@ import { BaseService } from './base.service';
 import { IAuteur, IResult, ILink } from './index';
 
 @Injectable()
-export class AuteursService extends BaseService{
+export class AuteursService extends BaseService<IAuteur> {
   url = 'http://apis.dirkandries.be/api/auteurs';
   constructor(private http: Http, private _router: Router) {
     super(_router);
@@ -19,13 +19,13 @@ export class AuteursService extends BaseService{
       const result: IResult<IAuteur> = <IResult<IAuteur>>response.json();
       result.value = result.value.filter(a => a.naam !== null);
       return result;
-    }).catch(this.handleError);
+    }).catch((error) => this.handleError(error));
   }
 
   getAuteurDetails(id): Observable<IAuteur> {
     return this.http.get(`${this.url}/${id}`).map((response: Response) => {
       return <IAuteur>response.json();
-    }).catch(this.handleError);
+    }).catch((error) => this.handleError(error));
   }
   deleteAuteur(auteur: IAuteur) {
     const link: ILink = auteur.links.find(l => l.method === 'DELETE');
