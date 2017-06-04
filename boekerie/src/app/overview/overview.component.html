@@ -1,38 +1,44 @@
-<div class="col-md-12">
-    <div class="col-md-4">Auteur:
-        <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="selectedAuteur">
-            <option value="undefined">--please select--</option>
-            <option *ngFor="let auteur of auteurs" [ngValue]="auteur">{{auteur.naam}}</option>
-        </select>
+<div class="container col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">Auteur:
+                    <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="selectedAuteur">
+                        <option value="undefined">--please select--</option>
+                        <option *ngFor="let auteur of auteurs" [ngValue]="auteur">{{auteur.naam}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4">Genre:
+                    <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="selectedGenre">
+                        <option value="undefined">--please select--</option>
+                        <option *ngFor="let genre of genres" [ngValue]="genre">{{genre.naam}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4">Titel:
+                    <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="selectedTitel">
+                        <option value="undefined">--please select--</option>
+                        <option *ngFor="let book of allBooks" [ngValue]="book">{{book.titel}}</option>
+                    </select>
+                </div>
+            </div>
+                
+            <div class="row btnRow">
+                <div class="col-md-3">
+                    <button class="btn btn-success" (click)="filter()"><i class="glyphicon glyphicon-ok-sign"></i>&nbsp;Voer filter uit</button>
+                    <button class="btn btn-danger" (click)="filterReset()"><i class="glyphicon glyphicon-remove-sign"></i>&nbsp;Reset filter</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">Genre:
-        <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="selectedGenre">
-            <option value="undefined">--please select--</option>
-            <option *ngFor="let genre of genres" [ngValue]="genre">{{genre.naam}}</option>
-        </select>
+    <hr>
+    <!--Onderstaande button is de final filter... tenzij er een responsive filter kan gebruikt worden-->
+
+    <div class="btn-group btn-group-sm" style="margin: 0px 20px;">
+        <button class="btn btn-default" [class.active]="sortBy==='titel'" (click)="sort('titel')">
+                Op titel&nbsp;<span *ngIf="sortBy==='titel'" class="glyphicon glyphicon-chevron-{{sortMethod}}"></span>
+            </button>
+        <button class="btn btn-default" [class.active]="sortBy==='auteur'" (click)="sort('auteur')">Op auteur <span *ngIf="sortBy==='auteur'" class="glyphicon glyphicon-chevron-{{sortMethod}}"></span></button>
     </div>
-    <div class="col-md-4">Titel:
-        <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="selectedTitel">
-            <option value="undefined">--please select--</option>
-            <option *ngFor="let book of allBooks" [ngValue]="book">{{book.titel}}</option>
-        </select>
-    </div>
-    <div class="col-md-3">
-        <button class="btn btn-success" (click)="filter()"><i class="glyphicon glyphicon-ok-sign"></i>&nbsp;Voer filter uit</button>
-        <button class="btn btn-danger" (click)="filterReset()"><i class="glyphicon glyphicon-remove-sign"></i>&nbsp;Reset filter</button>
-    </div>
+    <hr>
+    <app-overview-list [books]="books"></app-overview-list>
 </div>
-<hr>
-<!--Onderstaande button is de final filter... tenzij er een responsive filter kan gebruikt worden-->
-
-
-
-<hr>
-<div class="btn-group btn-group-sm" style="margin: 0px 20px;">
-    <button class="btn btn-default" [class.active]="sortBy==='titel'" (click)="sort('titel')">
-              Op titel&nbsp;<span *ngIf="sortBy==='titel'" class="glyphicon glyphicon-chevron-{{sortMethod}}"></span>
-          </button>
-    <button class="btn btn-default" [class.active]="sortBy==='auteur'" (click)="sort('auteur')">Op auteur <span *ngIf="sortBy==='auteur'" class="glyphicon glyphicon-chevron-{{sortMethod}}"></span></button>
-</div>
-<hr>
-<app-overview-list [books]="books"></app-overview-list>

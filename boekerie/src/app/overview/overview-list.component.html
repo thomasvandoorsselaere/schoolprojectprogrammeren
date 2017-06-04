@@ -2,7 +2,12 @@
   <div class="row">
     <app-collapsible-well>
       <div well-title>
-        "{{ book.titel }}" by {{ book.auteur?.naam }}
+        <div class="row">
+          <div class="col-md-10">{{ book.titel }}" by {{ book.auteur?.naam }}</div>
+          <div class="col-md-2">
+            <star-rating-comp [readOnly]="true" [staticColor]="'positive'" [starType]="'svg'" [rating]="book.sterren"></star-rating-comp>
+          </div>
+        </div>
       </div>
       <div well-body>
         <div class="row">
@@ -21,10 +26,6 @@
                   <div *ngFor="let tag of book.tags" class="badge">
                     <span aria-hidden="true" class="glyphicon glyphicon-tag"></span>&nbsp;{{ tag | uppercase }}
                   </div>
-              </span>
-              <span>
-                <h4>Rating:</h4>
-                <star-rating-comp [staticColor]="'positive'" [starType]="'svg'" [rating]="book.sterren"></star-rating-comp>
               </span>
             </div>
             <div class="row">
