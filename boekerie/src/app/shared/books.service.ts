@@ -13,10 +13,9 @@ export class BookService extends BaseService<IBook> {
   constructor(private http: Http, private router: Router) {
     super(router, http);
   }
+
   getBooks(): Observable<IResult<IBook>> {
-    return this.http.get(this.url).map((response: Response) => {
-      return <IResult<IBook>>response.json();
-    }).catch(this.handleError);
+    return this.getListBase(this.url);
   }
 
 /*  getDetails(isbn: string): Observable<IBook> {
@@ -28,7 +27,6 @@ export class BookService extends BaseService<IBook> {
   getDetails(isbn: string): Observable<IBook> {
     return this.getDetailsBase(this.url, isbn);
   }
-
 
 
 /*  getFilteredBooks(auteur, genre, titel) {
