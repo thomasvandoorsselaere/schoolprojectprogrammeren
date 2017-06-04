@@ -14,13 +14,10 @@ export class AuteursService extends BaseService<IAuteur> {
     super(router, http);
   }
   getAuteurs(): Observable<IResult<IAuteur>> {
-    return this.getListBase(this.url);
-    /*return this.http.get(this.url).map((response: Response) => {
-      // null check omwille van genre met NULL-naam
-      const result: IResult<IAuteur> = <IResult<IAuteur>>response.json();
-      result.value = result.value.filter(a => a.naam !== null);
+    return this.getListBase(this.url).map((result: IResult<IAuteur>) => {
+      result.value = result.value.filter(g => g.naam !== null);
       return result;
-    }).catch((error) => this.handleError(error));*/
+    });
   }
 
   getDetails(id: number): Observable<IAuteur> {

@@ -16,15 +16,10 @@ export class GenresService extends BaseService<IGenre> {
   }
 
   getGenres(): Observable<IResult<IGenre>> {
-    return this.getListBase(this.url);
-    // Onderstaande nog even laten staan.
-    // Nog na te denken over hoe de NULL's kunnen afgevangen worden, gezien 'naam' enkel voorkomt op genres en auteurs
-/*    return this.http.get(this.url).map((response: Response) => {
-      const result: IResult<IGenre> = <IResult<IGenre>>response.json();
-      // null check omwille van genre met NULL-naam
+    return this.getListBase(this.url).map((result: IResult<IGenre>) => {
       result.value = result.value.filter(g => g.naam !== null);
       return result;
-    }).catch((error) => this.handleError(error));*/
+    });
   }
 
   getDetails(id: number): Observable<IGenre> {
