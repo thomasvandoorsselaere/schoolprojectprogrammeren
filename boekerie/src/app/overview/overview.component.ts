@@ -30,8 +30,8 @@ export class OverviewComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.bookService.getBooks().subscribe((data) => { this.allBooks = data.value; });
-    this.bookService.getBooks().subscribe((data) => { this.books = data.value; });
+    this.bookService.getList().subscribe((data) => { this.allBooks = data.value; });
+    this.bookService.getList().subscribe((data) => { this.books = data.value; });
     this.auteursService.getAuteurs().subscribe(data => this.auteurs = data.value);
     this.genresService.getGenres().subscribe(data =>  this.genres = data.value );
     // need some mocking?
@@ -50,7 +50,7 @@ export class OverviewComponent implements OnInit {
      const genre = this.selectedGenre ? this.selectedGenre.naam : undefined;
      const titel = this.selectedTitel ? this.selectedTitel.titel : undefined;
      if (auteur === undefined && genre === undefined && titel === undefined) {
-       this.bookService.getBooks().subscribe((data) => { this.books = data.value; });
+       this.bookService.getList().subscribe((data) => { this.books = data.value; });
      } else {
        this.bookService.getFilteredBooks(auteur, genre, titel).subscribe((data) => {
          this.books = data.value;
@@ -61,7 +61,7 @@ export class OverviewComponent implements OnInit {
     this.selectedAuteur = undefined;
     this.selectedGenre = undefined;
     this.selectedTitel = undefined;
-    this.bookService.getBooks().subscribe((data) => { this.books = data.value; });
+    this.bookService.getList().subscribe((data) => { this.books = data.value; });
   }
     toggleSortMethod() {
       if (this.sortMethod === 'up') {

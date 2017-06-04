@@ -1,3 +1,6 @@
+<div *ngIf="zichtbareBooks.length === 0">
+   <h3><i class="glyphicon glyphicon-info-sign"></i>&nbsp;<em>Geen boek gevonden voor de opgegeven zoekcriteria.</em></h3>
+</div>
 <div class="container-fluid" *ngFor="let book of zichtbareBooks">
   <div class="row">
     <app-collapsible-well>

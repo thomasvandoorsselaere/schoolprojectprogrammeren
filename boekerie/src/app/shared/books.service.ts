@@ -8,33 +8,12 @@ import { IBook, IResult } from './index';
 
 @Injectable()
 export class BookService extends BaseService<IBook> {
-  url = 'http://apis.dirkandries.be/api/boeken';
+  static serviceUrl = 'http://apis.dirkandries.be/api/boeken';
   params = new URLSearchParams();
   constructor(private http: Http, private router: Router) {
-    super(router, http);
+    super(router, http, BookService.serviceUrl);
   }
 
-  getBooks(): Observable<IResult<IBook>> {
-    return this.getListBase(this.url);
-  }
-
-/*  getDetails(isbn: string): Observable<IBook> {
-    return this.http.get(`${this.url}/${isbn}`).map((response: Response) => {
-          return <IBook>response.json();
-    }).catch((error) => this.handleError(error));
-  }*/
-
-  getDetails(isbn: string): Observable<IBook> {
-    return this.getDetailsBase(this.url, isbn);
-  }
-
-
-/*  getFilteredBooks(auteur, genre, titel) {
-    return this.http.get(this.url + '?auteur=${auteur}&genre=${genre}&titel=${titel}').map((response: Response) => {
-      return <IBook[]>response.json().value;
-    }).catch(this.handleError);;
-  }
-*/
   getFilteredBooks(auteur, genre, titel): Observable<IResult<IBook>> {
     if (auteur) {
       this.params.set('auteur', auteur);
@@ -51,11 +30,7 @@ export class BookService extends BaseService<IBook> {
     } else {
       this.params.delete('titel');
     }
-
-    return this.http.get(this.url, {search: this.params})
-     .map((response: Response) => {
-      return <IResult<IBook>>response.json();
-    }).catch(this.handleError);
+    return this.getFilteredItems(this.params);
   }
 
   // indien mock nodig is (a.k.a. API-offline-toestanden), geeft onderstaande redding (alle bovenstaande zaken mogen in commentaar, overview.component.ts moet ook nog aangepast worden ifv mock)

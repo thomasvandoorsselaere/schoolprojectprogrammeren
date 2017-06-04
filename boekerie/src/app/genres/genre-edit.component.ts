@@ -24,6 +24,6 @@ export class GenreEditComponent implements OnInit {
     };
   }
   deleteGenre() {
-      this.genresService.deleteGenre(this.genre).subscribe(r => this.router.navigate(['/']));
+      this.genresService.deleteItem(this.genre).subscribe(r => this.router.navigate(['/']));
     }
 }

@@ -8,7 +8,7 @@ export class BooksResolver implements Resolve<any> {
   constructor(private bookService: BookService ) { }
 
   resolve() {
-    return this.bookService.getBooks();
+    return this.bookService.getList();
   }
 }
 

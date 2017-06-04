@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { IResult, ILink } from 'app/shared';
 
 export class BaseService<T> {
-    constructor(private _router: Router, private _http: Http) {
+
+    constructor(private _router: Router, private _http: Http, private _url: string) {
 
     }
     public handleError(error: Response) {
@@ -14,13 +15,14 @@ export class BaseService<T> {
       this._router.navigate(['/auch', error.status]);
       return Observable.throw(error.statusText);
     }
-    getDetailsBase(_url: string, _identifier: any): Observable<T> {
-    return this._http.get(`${_url}/${_identifier}`).map((response: Response) => {
+    getDetails(_identifier: any): Observable<T> {
+    return this._http.get(`${this._url}/${_identifier}`).map((response: Response) => {
           return <T>response.json();
     }).catch((error) => this.handleError(error));
   }
-    getListBase(_url: string): Observable<IResult<T>> {
-    return this._http.get(_url).map((response: Response) => {
+
+   getList(): Observable<IResult<T>> {
+    return this._http.get(this._url).map((response: Response) => {
       const result = <IResult<T>>response.json();
       return <IResult<T>>response.json();
     }).catch((error) => this.handleError(error));
@@ -35,4 +37,12 @@ export class BaseService<T> {
       return this._http.delete(link.href).catch(this.handleError);
     }
   }
+  
+  getFilteredItems(searchParams) {
+        return this._http.get(this._url, {search: searchParams})
+     .map((response: Response) => {
+      return <IResult<T>>response.json();
+    }).catch(this.handleError);
+  }
+
 }

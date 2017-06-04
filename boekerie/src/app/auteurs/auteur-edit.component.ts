@@ -24,6 +24,6 @@ export class AuteurDetailsComponent implements OnInit {
     };
   }
   deleteAuteur() {
-      this.auteursService.deleteAuteur(this.auteur).subscribe(r => this.router.navigate(['/']));
+      this.auteursService.deleteItem(this.auteur).subscribe(r => this.router.navigate(['/']));
     }
 }

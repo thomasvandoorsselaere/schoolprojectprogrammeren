@@ -9,22 +9,14 @@ import { IAuteur, IResult, ILink } from './index';
 
 @Injectable()
 export class AuteursService extends BaseService<IAuteur> {
-  url = 'http://apis.dirkandries.be/api/auteurs';
+  static serviceUrl = 'http://apis.dirkandries.be/api/auteurs';
   constructor(private http: Http, private router: Router) {
-    super(router, http);
+    super(router, http, AuteursService.serviceUrl);
   }
   getAuteurs(): Observable<IResult<IAuteur>> {
-    return this.getListBase(this.url).map((result: IResult<IAuteur>) => {
+    return this.getList().map((result: IResult<IAuteur>) => {
       result.value = result.value.filter(g => g.naam !== null);
       return result;
     });
-  }
-
-  getDetails(id: number): Observable<IAuteur> {
-    return this.getDetailsBase(this.url, id);
-  }
-
-  deleteAuteur(auteur: IAuteur): Observable<IAuteur> {
-    return this.deleteItem (auteur);
   }
 }

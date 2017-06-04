@@ -22,6 +22,7 @@ export class CreateComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+     /*getAuteurs i.p.v. getList => dit omwille van null-check die niet aanwezig is op getList*/
     this.auteursService.getAuteurs().subscribe(data => this.auteurs = data.value);
     this.genresService.getGenres().subscribe(data =>  this.genres = data.value );
   }
