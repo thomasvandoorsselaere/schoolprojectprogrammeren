@@ -46,4 +46,11 @@ export class BaseService<T> {
     }).catch(this.handleError);
   }
 
+    updateBook(item): Observable<T> {
+    return this._http.put(this._url, {search: item}).map((response: Response)=>{
+      return <IResult<T>>response.json();
+    }).catch(this.handleError);
+    
+  }
+
 }
