@@ -65,9 +65,12 @@ export class BaseService<T> {
   }
 
     updateBook(item): Observable<T> {
-    return this._http.put(this._url, {search: item}).map((response: Response)=>{
+      console.log(item);
+      const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+    return this._http.put(`${this._url}/${item.isbn}`, JSON.stringify(item), options).map((response: Response) => {
       return <IResult<T>>response.json();
-    }).catch(this.handleError);
+    }).catch((error) => this.handleError(error));
   }
 
 }

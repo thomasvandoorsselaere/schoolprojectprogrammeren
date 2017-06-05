@@ -2,58 +2,58 @@
 
 <hr>
 <div class="col-md-6">
-  <form #newBookForm="ngForm" (ngSubmit)="updateBoek()" autocomplete="off" novaliauthor>
+  <form #editBookForm="ngForm" (ngSubmit)="updateBoek()" autocomplete="off" novaliauthor>
 
-    <div class="form-group" [ngClass]="{'error': newBookForm.controls.name?.invalid && newBookForm.controls.name?.touched}">
+    <div class="form-group" [ngClass]="{'error': editBookForm.controls.name?.invalid && editBookForm.controls.name?.touched}">
       <label for="bookTitle">Titel:</label>
-        <em *ngIf="newBookForm.controls.name?.invalid && (newBookForm.controls.name?.touched)">Required</em>
-          <input (ngModel)="name" name="name" required id="name" type="text" class="form-control" value="" placeholder="{{book.titel}}" />
+        <em *ngIf="editBookForm.controls.name?.invalid && (editBookForm.controls.name?.touched)">Required</em>
+          <input [(ngModel)]="book.titel" name="name" required id="name" type="text" class="form-control" value="" placeholder="{{book.titel}}" />
     </div>
 
-    <div class="form-group" [ngClass]="{'error': newBookForm.controls.author?.invalid && newBookForm.controls.author?.touched}">
+    <div class="form-group" [ngClass]="{'error': editBookForm.controls.author?.invalid && editBookForm.controls.author?.touched}">
         <label for="bookAuthor">Auteur:</label>
-         <input (ngModel)="auteur" name="auteur" required id="auteur" type="text" class="form-control" value="{{book.auteur.naam}}" placeholder="{{book.auteur.naam}}" />
+         <input [(ngModel)]="book.auteur.naam" name="auteur" required id="auteur" type="text" class="form-control" value="{{book.auteur.naam}}" placeholder="{{book.auteur.naam}}" />
             <!--<select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="selectedAuteur">
               <option value="undefined">Selecteer auteur</option>
               <option *ngFor="let auteur of auteurs" [ngValue]="auteur">{{auteur.naam}}</option>
             </select>-->
     </div>
 
-    <div class="form-group" [ngClass]="{'error': newBookForm.controls.isbn?.invalid && newBookForm.controls.isbn?.touched}">
+    <div class="form-group" [ngClass]="{'error': editBookForm.controls.isbn?.invalid && editBookForm.controls.isbn?.touched}">
       <label for="bookIsbn">ISBN:</label>
-        <em *ngIf="newBookForm.controls.isbn?.invalid && (newBookForm.controls.isbn?.touched)">Required</em>
-          <input (ngModel)="isbn" name="isbn" required id="bookIsbn" type="text" class="form-control" placeholder=" {{book.isbn}}" value="{{book.isbn}}" />
+        <em *ngIf="editBookForm.controls.isbn?.invalid && (editBookForm.controls.isbn?.touched)">Required</em>
+          <input [(ngModel)]="book.isbn" name="isbn" required id="bookIsbn" type="text" class="form-control" placeholder=" {{book.isbn}}" value="{{book.isbn}}" />
     </div>
 
-    <div class="form-group" [ngClass]="{'error': newBookForm.controls.genre?.invalid && newBookForm.controls.genre?.touched}">
+    <div class="form-group" [ngClass]="{'error': editBookForm.controls.genre?.invalid && editBookForm.controls.genre?.touched}">
       <label for="bookgenre">Genre:</label>
-       <input (ngModel)="genre" name="genre" required id="genre" type="text" class="form-control" placeholder=" {{book.genre.naam}}" />
+       <input [(ngModel)]="book.genre.naam" name="genre" required id="genre" type="text" class="form-control" placeholder=" {{book.genre.naam}}" />
         <!--<select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="selectedGenre">
            <option value="undefined">Selecteer genre</option>
            <option *ngFor="let genre of genres" [ngValue]="genre">{{genre.naam}}</option>
         </select>-->
     </div>
-
-     <div class="form-group" [ngClass]="{'error': newBookForm.controls.tags?.invalid && newBookForm.controls.tags?.touched}">
+    <!--Tags moten sowieso herbekeken worden cfr. create-book -->
+<!--     <div class="form-group" [ngClass]="{'error': editBookForm.controls.tags?.invalid && editBookForm.controls.tags?.touched}">
       <label for="bookTags">Tags:</label>
-        <em *ngIf="newBookForm.controls.tags?.invalid && (newBookForm.controls.tags?.touched)">Required</em>
+        <em *ngIf="editBookForm.controls.tags?.invalid && (editBookForm.controls.tags?.touched)">Required</em>
           <input (ngModel)="tags" name="tags" required id="bookTags" type="text" class="form-control" placeholder="{{book.tags}}" />
-    </div>
+    </div>-->
 
     <div class="form-group">
       <label for="uitgegeven">Uitgegeven:</label>
-        <input  type="text" class="form-control" name="uitgegeven" type="number" placeholder="{{book.uitgegeven}}" />
+        <input [(ngModel)]="book.uitgegeven" type="text" class="form-control" name="uitgegeven" type="number" placeholder="{{book.uitgegeven}}" />
     </div>
     
-    <div class="form-group" [ngClass]="{'error': newBookForm.controls.imageUrl?.invalid && newBookForm.controls.imageUrl?.touched}">
+    <div class="form-group" [ngClass]="{'error': editBookForm.controls.imageUrl?.invalid && editBookForm.controls.imageUrl?.touched}">
       <label for="imageUrl">Cover:</label>
-        <em *ngIf="newBookForm.controls.imageUrl?.invalid && newBookForm.controls.imageUrl?.touched && newBookForm.controls.imageUrl?.errors.required">Required</em>
-        <em *ngIf="newBookForm.controls.imageUrl?.invalid && newBookForm.controls.imageUrl?.touched  && newBookForm.controls.imageUrl?.errors.pattern">Must be a png or jpg url</em>
-          <input (ngModel)="imageUrl" name="imageUrl" required pattern=".*\/.*.(png|jpg)" id="imageUrl" type="text" class="form-control" placeholder="{{book.cover}}"/>
-            <img [src]="newBookForm.controls.imageUrl.value" *ngIf="newBookForm.controls.imageUrl?.valid"/>
+        <em *ngIf="editBookForm.controls.imageUrl?.invalid && editBookForm.controls.imageUrl?.touched && editBookForm.controls.imageUrl?.errors.required">Required</em>
+        <em *ngIf="editBookForm.controls.imageUrl?.invalid && editBookForm.controls.imageUrl?.touched  && editBookForm.controls.imageUrl?.errors.pattern">Must be a png or jpg url</em>
+          <input [(ngModel)]="book.cover.value" name="imageUrl" required pattern=".*\/.*.(png|jpg)" id="imageUrl" type="text" class="form-control" placeholder="{{book.cover}}"/>
+            <img [src]="editBookForm.controls.imageUrl.value" *ngIf="editBookForm.controls.imageUrl?.valid"/>
     </div>
     
     <button type="submit" class="btn btn-primary" >Save</button>
-    <button type="button" [disabled]="newBookForm.invalid" class="btn btn-default" (click)="cancel()" [routerLink]="['/details', book.isbn]">Cancel</button>
+    <button type="button" [disabled]="editBookForm.invalid" class="btn btn-default" (click)="cancel()" [routerLink]="['/details', book.isbn]">Cancel</button>
   </form>
 </div>
