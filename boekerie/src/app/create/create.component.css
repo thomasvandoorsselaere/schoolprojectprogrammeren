@@ -1,0 +1,11 @@
+.selectedTag {
+    background-color:#337ab7;
+    border: 1px solid #2e6da4;
+}
+
+.availableTag {
+    color: #7b7b7b;    
+    background-color:#fff;
+    border: 1px solid #ccc;
+
+}

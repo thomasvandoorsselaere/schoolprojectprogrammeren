@@ -1,17 +1,17 @@
 <h1>Nieuwe Boek</h1>
 <hr>
 <div class="col-md-6">
-  <form #newBookForm="ngForm" (ngSubmit)="saveBook(newBookForm.value)" autocomplete="off" novaliauthor>
+  <form #newBookForm="ngForm" (ngSubmit)="saveBook()" autocomplete="off" novaliauthor>
 
-    <div class="form-group" [ngClass]="{'error': newBookForm.controls.name?.invalid && newBookForm.controls.name?.touched}">
+    <div class="form-group" [ngClass]="{'error': newBookForm.controls.titel?.invalid && newBookForm.controls.titel?.touched}">
       <label for="bookTitle">Titel:</label>
-        <em *ngIf="newBookForm.controls.name?.invalid && (newBookForm.controls.name?.touched)">Required</em>
-          <input (ngModel)="name" name="name" required id="name" type="text" class="form-control" placeholder="Geef de titel van je boek" />
+        <em *ngIf="newBookForm.controls.titel?.invalid && (newBookForm.controls.titel?.touched)">Required</em>
+          <input [(ngModel)]="book.titel" name="titel" required id="titel" type="text" class="form-control" placeholder="Geef de titel van je boek" />
     </div>
 
     <div class="form-group" [ngClass]="{'error': newBookForm.controls.author?.invalid && newBookForm.controls.author?.touched}">
         <label for="bookAuthor">Auteur:</label>
-            <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="selectedAuteur">
+            <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="book.auteur" name="auteurSelector">
               <option value="undefined">Selecteer auteur</option>
               <option *ngFor="let auteur of auteurs" [ngValue]="auteur">{{auteur.naam}}</option>
             </select>
@@ -20,12 +20,12 @@
     <div class="form-group" [ngClass]="{'error': newBookForm.controls.isbn?.invalid && newBookForm.controls.isbn?.touched}">
       <label for="bookIsbn">ISBN:</label>
         <em *ngIf="newBookForm.controls.isbn?.invalid && (newBookForm.controls.isbn?.touched)">Required</em>
-          <input (ngModel)="isbn" name="isbn" required id="bookIsbn" type="text" class="form-control" placeholder="Geef de ISBN nummer" />
+          <input [(ngModel)]="book.isbn" name="isbn" required id="bookIsbn" type="text" class="form-control" placeholder="Geef de ISBN nummer" />
     </div>
 
     <div class="form-group" [ngClass]="{'error': newBookForm.controls.genre?.invalid && newBookForm.controls.genre?.touched}">
       <label for="bookgenre">Genre:</label>
-        <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="selectedGenre">
+        <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" name="genreSelector" aria-expanded="true" [(ngModel)]="book.genre">
            <option value="undefined">Selecteer genre</option>
            <option *ngFor="let genre of genres" [ngValue]="genre">{{genre.naam}}</option>
         </select>
@@ -37,27 +37,52 @@
           <input (ngModel)="tags" name="tags" required id="bookTags" type="text" class="form-control" placeholder="Geef tags" />
     </div>-->
 
+<!--lay-out nog aan te passen-->
     <div class="form-group">
-      <label for="bookTags">Tags:</label>
-      <div *ngFor="let tag of tags" class="badge">
-            <span aria-hidden="true" class="glyphicon glyphicon-tag"></span>&nbsp;{{ tag | uppercase }}
-      </div>
-          <input (ngModel)="tag" name="tag" type="text" class="form-control" placeholder="{{tag}}" />
-    </div>
+      <label>Tags:</label>
+      <div class="col-md-12">
+      <span *ngFor="let tag of selectedTags" name="deleteTagButton" class="badge selectedTag" (click)="removeTagFromSelected(tag)">
+        <span aria-hidden="true" class="glyphicon glyphicon-tag"></span>
+        &nbsp;{{ tag | uppercase }}&nbsp;
+        <span aria-hidden="true" class="glyphicon glyphicon-remove-sign"></span>
+        </span>
+        <span *ngFor="let tag of availableTags" name="deleteTagButton" class="badge availableTag" (click)="addTagToSelected(tag)">
+          <span aria-hidden="true" class="glyphicon glyphicon-tag"></span>&nbsp;{{ tag }}&nbsp;
+                  </span>
+</div>
+<div class="col-md-12">
+<hr></div>
+            <input [(ngModel)]="newTagModel" #newTag name="newTagInput" type="text" class="form-control" placeholder="Voeg een nieuwe tag toe..." />
+          <button  class="btn btn-success" type="button" (click)="addNewTag(newTag.value)"><i class="glyphicon glyphicon-ok"></i>
+          </button>
+
+     </div>
 
     <div class="form-group">
       <label for="uitgegeven">Uitgegeven:</label>
-        <input  type="text" class="form-control" name="uitgegeven" type="number" placeholder="Geef uitgave jaar" />
+        <input [(ngModel)]="book.uitgegeven" type="text" class="form-control" name="uitgegeven" type="number" placeholder="Geef uitgave jaar" />
     </div>
     
     <div class="form-group" [ngClass]="{'error': newBookForm.controls.imageUrl?.invalid && newBookForm.controls.imageUrl?.touched}">
       <label for="imageUrl">Cover:</label>
         <em *ngIf="newBookForm.controls.imageUrl?.invalid && newBookForm.controls.imageUrl?.touched && newBookForm.controls.imageUrl?.errors.required">Required</em>
         <em *ngIf="newBookForm.controls.imageUrl?.invalid && newBookForm.controls.imageUrl?.touched  && newBookForm.controls.imageUrl?.errors.pattern">Must be a png or jpg url</em>
-          <input (ngModel)="imageUrl" name="imageUrl" required pattern=".*\/.*.(png|jpg)" id="imageUrl" type="text" class="form-control" placeholder="url of image..." />
+          <input [(ngModel)]="book.cover" name="imageUrl" required pattern=".*\/.*.(png|jpg)" id="imageUrl" type="text" class="form-control" placeholder="url of image..." />
             <img [src]="newBookForm.controls.imageUrl.value" *ngIf="newBookForm.controls.imageUrl?.valid"/>
+    <div class="form-group">
+      <div class="col-md-2">
+        <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" name="starSelector" aria-expanded="true" [(ngModel)]="book.sterren">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
     </div>
-    
+    </div>
+
     <button type="submit" class="btn btn-primary">Save</button>
     <button type="button" [disabled]="newBookForm.invalid" class="btn btn-default" (click)="cancel()">Cancel</button>
   </form>

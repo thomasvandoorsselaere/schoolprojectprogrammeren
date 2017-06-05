@@ -35,7 +35,7 @@ export class BaseService<T> {
       this.handleError(<Response>{});
       return Observable.empty();
     } else {
-      return this._http.delete(link.href).catch(this.handleError);
+      return this._http.delete(link.href).catch((error) => this.handleError(error));
     }
   }
 
@@ -43,7 +43,26 @@ export class BaseService<T> {
         return this._http.get(this._url, {search: searchParams})
      .map((response: Response) => {
       return <IResult<T>>response.json();
-    }).catch(this.handleError);
+    }).catch((error) => this.handleError(error));
+  }
+
+  postItem(item): Observable<T> {
+    console.log(item);
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+    this._http.post(this._url, JSON.stringify(item), options).map((response: Response) => {
+      console.log(response);
+      return response.json();
+    }).catch((error) => this.handleError(error)).subscribe();
+    return null;
+  }
+
+  toUpper(w: string) {
+    return w.toUpperCase();
+  }
+  getTagList() {
+    let waarden = ['Test1', 'Test2', 'Test3', 'Test4'];
+    return waarden.map(w => this.toUpper(w));
   }
 
 }

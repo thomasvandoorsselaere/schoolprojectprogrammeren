@@ -6,7 +6,7 @@
     <app-collapsible-well>
       <div well-title>
         <div class="row">
-          <div class="col-md-10">{{ book.titel }}" by {{ book.auteur?.naam }}</div>
+          <div class="col-md-10">"{{ book.titel }}" by {{ book.auteur?.naam }}</div>
           <div class="col-md-2">
             <star-rating-comp [readOnly]="true" [staticColor]="'positive'" [starType]="'svg'" [rating]="book.sterren"></star-rating-comp>
           </div>
