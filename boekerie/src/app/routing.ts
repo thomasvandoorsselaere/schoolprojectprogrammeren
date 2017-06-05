@@ -14,11 +14,13 @@ import { GenresResolver } from './genres/genres-resolver.service';
 import { AuteursResolver } from './auteurs/auteurs-resolver.service';
 import { GenreDetailsResolver } from 'app/genres/genre-details-resolver.service';
 import { AuteurDetailsResolver } from 'app/auteurs/auteur-details-resolver.service';
+import { EditbookComponent } from 'app/bookdetails/editbook/editbook.component';
 
 export const routes: Routes = [
   { path: '',  pathMatch: 'full', redirectTo: 'overview'},
   { path: 'overview', component: OverviewComponent, resolve: { books: BooksResolver}},
   { path: 'details/:isbn', component: BookDetailsComponent, resolve: { bookdetails: BookDetailsResolver}},
+  { path: 'detail/:isbn', component: EditbookComponent, resolve: { bookdetails: BookDetailsResolver}},
   { path: 'create', component: CreateComponent},
   { path: 'genres', component: GenresComponent, resolve: {genres: GenresResolver}},
   { path: 'genres/:id', component: GenreEditComponent, resolve: {genredetails: GenreDetailsResolver}},

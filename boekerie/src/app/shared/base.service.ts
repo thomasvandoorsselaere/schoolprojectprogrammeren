@@ -65,4 +65,11 @@ export class BaseService<T> {
     return waarden.map(w => this.toUpper(w));
   }
 
+    updateBook(item): Observable<T> {
+    return this._http.put(this._url, {search: item}).map((response: Response)=>{
+      return <IResult<T>>response.json();
+    }).catch(this.handleError);
+    
+  }
+
 }

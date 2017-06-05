@@ -36,4 +36,6 @@
   <div class="col-md-3">
     <button class="btn btn-success" (click)="PopupVerwijderenBoek()">Verwijder boek</button>
   </div>
+
+ <button class="btn btn-success" [routerLink]="['/detail', book.isbn]">edit boek</button>
 </div>
