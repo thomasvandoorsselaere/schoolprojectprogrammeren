@@ -64,7 +64,7 @@ import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
     HttpModule,
     AlertModule.forRoot(),
     RouterModule.forRoot(routes),
-    PopupModule
+    PopupModule.forRoot()
   ],
   providers: [
     BookService,
