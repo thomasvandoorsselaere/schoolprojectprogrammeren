@@ -1,3 +1,8 @@
+  <popup #popupdelete (confirmClick)="VewijderenBoek()">
+    Bent u zeker dat u het boek wilt verwijderen?
+  </popup>
+  
+  
   <div class="container">
     <div class="row">
       <div class="col-md-11">
@@ -9,17 +14,14 @@
     <div class="col-md-6">
       <div><strong>Isbn: </strong> {{book.isbn}}</div>
       <div><strong>Uitgegeven: </strong> {{book.uitgegeven}}</div>
-    </div>
-    <div class="col-md-6">
-      <div><strong>Auteur: </strong>{{book.auteur.naam}}</div>
-      <button type="button" class="btn btn-info">Voeg auteur toe</button>
-      <div><strong>Genre: </strong>{{book.genre.naam}}</div>
-      <button type="button" class="btn btn-info">Voeg genre toe</button>
-      <br>
-      <strong>Tags: </strong>
+       <strong>Tags: </strong>
       <div *ngFor="let tag of book.tags" class="badge">
             <span aria-hidden="true" class="glyphicon glyphicon-tag"></span>&nbsp;{{ tag | uppercase }}
       </div>
+    </div>
+    <div class="col-md-6">
+      <div><strong>Auteur: </strong>{{book.auteur.naam}}</div>
+      <div><strong>Genre: </strong>{{book.genre.naam}}</div>
     </div>
   </div>
   <hr>
@@ -27,10 +29,11 @@
     <span>
        <img class="img-rounded" height="250px" src="{{ book.cover }}"/>
     </span>
-  </div>
-  <div class="col-md-3">
     <span>
       <star-rating-comp [staticColor]="'positive'" [starType]="'svg'" [rating]="book.sterren"></star-rating-comp>
     </span>
+  </div>
+  <div class="col-md-3">
+    <button class="btn btn-success" (click)="PopupVerwijderenBoek()">Verwijder boek</button>
   </div>
 </div>

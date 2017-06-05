@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { AlertModule } from 'ngx-bootstrap';
 import { StarRatingModule } from 'angular-star-rating';
+import { PopupModule } from 'ng2-opd-popup';
 
 // Routing
 import { routes } from './routing';
@@ -62,7 +63,8 @@ import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
     StarRatingModule,
     HttpModule,
     AlertModule.forRoot(),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    PopupModule.forRoot()
   ],
   providers: [
     BookService,
