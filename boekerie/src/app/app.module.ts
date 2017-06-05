@@ -23,6 +23,7 @@ import {
    CollapsibleWellComponent
  } from './common/index';
 import { ErrorPageComponent } from './error/error-page.component';
+import { EditbookComponent } from './bookdetails/editbook/editbook.component';
 
 // Services
 import { BookService } from './shared/books.service';
@@ -38,7 +39,6 @@ import { BaseService } from 'app/shared/base.service';
 
 // Pipes
 import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
-import { EditbookComponent } from './bookdetails/editbook/editbook.component';
 
 
 

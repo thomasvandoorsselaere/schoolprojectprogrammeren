@@ -72,8 +72,6 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
   saveBook() {
     this.book.tags = this.selectedTags;
     console.log(this.book);
-    this.postItem(this.book);
-    return null;
+    return this.postItem(this.book).subscribe();
   }
-
 }

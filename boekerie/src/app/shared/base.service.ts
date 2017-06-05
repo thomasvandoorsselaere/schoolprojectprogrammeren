@@ -50,11 +50,10 @@ export class BaseService<T> {
     console.log(item);
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
-    this._http.post(this._url, JSON.stringify(item), options).map((response: Response) => {
+    return this._http.post(this._url, JSON.stringify(item), options).map((response: Response) => {
       console.log(response);
       return response.json();
-    }).catch((error) => this.handleError(error)).subscribe();
-    return null;
+    }).catch((error) => this.handleError(error));
   }
 
   toUpper(w: string) {
@@ -69,7 +68,6 @@ export class BaseService<T> {
     return this._http.put(this._url, {search: item}).map((response: Response)=>{
       return <IResult<T>>response.json();
     }).catch(this.handleError);
-    
   }
 
 }

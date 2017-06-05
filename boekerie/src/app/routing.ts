@@ -20,7 +20,7 @@ export const routes: Routes = [
   { path: '',  pathMatch: 'full', redirectTo: 'overview'},
   { path: 'overview', component: OverviewComponent, resolve: { books: BooksResolver}},
   { path: 'details/:isbn', component: BookDetailsComponent, resolve: { bookdetails: BookDetailsResolver}},
-  { path: 'detail/:isbn', component: EditbookComponent, resolve: { bookdetails: BookDetailsResolver}},
+  { path: 'edit/:isbn', component: EditbookComponent, resolve: { bookdetails: BookDetailsResolver}},
   { path: 'create', component: CreateComponent},
   { path: 'genres', component: GenresComponent, resolve: {genres: GenresResolver}},
   { path: 'genres/:id', component: GenreEditComponent, resolve: {genredetails: GenreDetailsResolver}},
