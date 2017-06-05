@@ -38,6 +38,7 @@ import { BaseService } from 'app/shared/base.service';
 
 // Pipes
 import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
+import { EditbookComponent } from './bookdetails/editbook/editbook.component';
 
 
 
@@ -55,7 +56,8 @@ import { UitgaveJaarPipe } from './shared/uitgave-jaar.pipe';
     AuteursComponent,
     GenreEditComponent,
     AuteurDetailsComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    EditbookComponent
   ],
   imports: [
     BrowserModule,
