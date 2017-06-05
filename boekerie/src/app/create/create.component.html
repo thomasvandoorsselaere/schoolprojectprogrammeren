@@ -31,10 +31,18 @@
         </select>
     </div>
 
-     <div class="form-group" [ngClass]="{'error': newBookForm.controls.tags?.invalid && newBookForm.controls.tags?.touched}">
+     <!--<div class="form-group" [ngClass]="{'error': newBookForm.controls.tags?.invalid && newBookForm.controls.tags?.touched}">
       <label for="bookTags">Tags:</label>
         <em *ngIf="newBookForm.controls.tags?.invalid && (newBookForm.controls.tags?.touched)">Required</em>
           <input (ngModel)="tags" name="tags" required id="bookTags" type="text" class="form-control" placeholder="Geef tags" />
+    </div>-->
+
+    <div class="form-group">
+      <label for="bookTags">Tags:</label>
+      <div *ngFor="let tag of tags" class="badge">
+            <span aria-hidden="true" class="glyphicon glyphicon-tag"></span>&nbsp;{{ tag | uppercase }}
+      </div>
+          <input (ngModel)="tag" name="tag" type="text" class="form-control" placeholder="{{tag}}" />
     </div>
 
     <div class="form-group">

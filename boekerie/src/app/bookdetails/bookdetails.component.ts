@@ -13,7 +13,7 @@ import { BookService } from '../shared/books.service';
 export class BookDetailsComponent implements OnInit {
 
   @ViewChild('popupdelete') popupdelete: Popup;
-  
+
    book: IBook;
 
   constructor(private route: ActivatedRoute, private bookService: BookService, private router: Router) { }
@@ -22,22 +22,22 @@ export class BookDetailsComponent implements OnInit {
      this.book = this.route.snapshot.data['bookdetails'];
   }
 
-  PopupVerwijderenBoek(){
-    this.popupdelete.options ={
-      header: "Verwijderen",
-      color: "#62A2AB",
+  PopupVerwijderenBoek() {
+    this.popupdelete.options = {
+      header: 'Verwijderen',
+      color: '#62A2AB',
       widthProsentage: 40,
       animationDuration: 1,
       showButtons: true,
-      confirmBtnContent: "OK", 
-      cancleBtnContent: "Cancel", 
-      confirmBtnClass: "btn btn-default", 
-      cancleBtnClass: "btn btn-default",
-      animation: "fadeInDown"
-      
+      confirmBtnContent: 'OK',
+      cancleBtnContent: 'Cancel',
+      confirmBtnClass: 'btn btn-default',
+      cancleBtnClass: 'btn btn-default',
+      animation: 'fadeInDown'
     };
+
     this.popupdelete.show(this.popupdelete.options);
-    
+
   }
 
   VewijderenBoek(){

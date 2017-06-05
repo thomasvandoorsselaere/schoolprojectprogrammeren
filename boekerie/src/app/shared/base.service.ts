@@ -15,6 +15,7 @@ export class BaseService<T> {
       this._router.navigate(['/auch', error.status]);
       return Observable.throw(error.statusText);
     }
+
     getDetails(_identifier: any): Observable<T> {
     return this._http.get(`${this._url}/${_identifier}`).map((response: Response) => {
           return <T>response.json();
@@ -37,7 +38,7 @@ export class BaseService<T> {
       return this._http.delete(link.href).catch(this.handleError);
     }
   }
-  
+
   getFilteredItems(searchParams) {
         return this._http.get(this._url, {search: searchParams})
      .map((response: Response) => {
