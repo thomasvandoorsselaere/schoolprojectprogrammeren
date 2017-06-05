@@ -77,8 +77,3 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
   }
 
 }
-/*interface Tag {
-  tag: string;
-  chosen: boolean;
-}
-*/
