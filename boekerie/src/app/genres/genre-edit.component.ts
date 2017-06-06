@@ -26,4 +26,8 @@ export class GenreEditComponent implements OnInit {
   deleteGenre() {
       this.genresService.deleteItem(this.genre).subscribe(r => this.router.navigate(['/']));
     }
+
+   updateGenre() {
+    this.genresService.updateItem(this.genre, this.genre.id).subscribe(r => this.router.navigate([`/genres`]));
+  }
 }

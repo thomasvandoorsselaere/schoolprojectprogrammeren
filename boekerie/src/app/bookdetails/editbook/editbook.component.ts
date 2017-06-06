@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { IBook,IGenre, IAuteur } from "app/shared/index";
+import { IBook, IGenre, IAuteur } from "app/shared/index";
 import { BookService } from "app/shared/books.service";
 
 @Component({
@@ -18,7 +18,7 @@ export class EditbookComponent implements OnInit {
   ngOnInit() {
      this.book = this.route.snapshot.data['bookdetails'];
   }
-  updateBoek(){
-    this.bookService.updateItem(this.book, this.book.isbn).subscribe(r => this.router.navigate(['/']));
+  updateBoek() {
+    this.bookService.updateItem(this.book, this.book.isbn).subscribe(r => this.router.navigate([`/details/${this.book.isbn}`]));
   }
 }

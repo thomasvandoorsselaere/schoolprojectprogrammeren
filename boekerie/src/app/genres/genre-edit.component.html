@@ -1,14 +1,13 @@
 <div class="container-fluid">
-    <h1>Wijzigen van genre: "{{ genre.naam }}"</h1><hr>
-    <form #editGenreForm="ngForm" (ngSubmit)="saveGenre(editGenreForm.value)" autocomplete="on">
+    <h1>Wijzigen van genre</h1><hr>
+    <form #editGenreForm="ngForm" (ngSubmit)="updateGenre()" autocomplete="on">
         <div class="form-group" [ngClass]="{'error': editGenreForm.controls.genreNaam?.invalid && editGenreForm.controls.genreNaam?.touched}">
             <div class="row">
                 <div class="col-md-2">
                     <label for="genreNaam">Nieuwe naam genre:</label>
                 </div>
                 <div class="col-md-3">
-                    <input (ngModel)="name" name="genreNaam" required id="genreNaam" type="text" class="form-control" placeholder="{{genre.naam}}" />
-                    <!--<em *ngIf="(editGenreForm.controls.genreNaam?.touched)">Required</em>-->
+                    <input [(ngModel)]="genre.naam" name="genreNaam" required id="genreNaam" type="text" class="form-control" placeholder="{{genre.naam}}" />
                 </div>
                 <!--hieronder de buttons voor het wijzigen en verwijderen van het object. Belangrijk! Iedere button binnen een form voert automatisch een submit uit, tenzij anders gespecifieerd a.d.h.v. "type"-attribute-->
                 <div class="col-md-6">

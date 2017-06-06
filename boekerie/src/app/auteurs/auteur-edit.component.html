@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <h1>Wijzigen van auteur: "{{auteur.naam}}"</h1><hr>
-    <form #editAuteurForm="ngForm" (ngSubmit)="saveAuteur(editAuteurForm.value)" autocomplete="on">
+    <h1>Wijzigen van auteur</h1><hr>
+    <form #editAuteurForm="ngForm" (ngSubmit)="updateAuteur()" autocomplete="on">
         <div class="form-group" [ngClass]="{'error': editAuteurForm.controls.auteurNaam?.invalid && editAuteurForm.controls.auteurNaam?.touched}">
             <div class="row">
                 <div class="col-md-2">
@@ -8,12 +8,12 @@
                 </div>
                 <div class="col-md-3">
                     <em *ngIf="editAuteurForm.controls.auteurNaam?.invalid && (editAuteurForm.controls.auteurNaam?.touched)">Required</em>
-                    <input (ngModel)="name" name="auteurNaam" required id="auteurNaam" type="text" class="form-control" placeholder="{{auteur.naam}}" />
+                    <input [(ngModel)]="auteur.naam" name="auteurNaam" required id="auteurNaam" type="text" class="form-control" placeholder="{{auteur.naam}}" />
                 </div>
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-3">
-                            <button class="btn btn-success">Wijzig auteur</button>
+                            <button class="btn btn-success" >Wijzig auteur</button>
                         </div>
                         <div class="col-md-6">
                             <button [disabled]="!hasDeleteMethod" class="btn btn-danger"  type="button" (click)="deleteAuteur()">Verwijder auteur</button><br/>

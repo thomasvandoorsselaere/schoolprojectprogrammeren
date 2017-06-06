@@ -1,7 +1,7 @@
 <div class="container-fluid" *ngFor="let genre of genres">
   <div class="row">
     <app-collapsible-well>
-        <div well-title>{{genre.id}}, {{ genre.naam }}</div>
+        <div well-title>{{ genre.naam }}</div>
         <div well-body>
                 <span class="detailsbtn">
                   <button type="button" class="btn btn-primary btn-md" [routerLink]="['/genres', genre.id]" >Wijzig genre</button>

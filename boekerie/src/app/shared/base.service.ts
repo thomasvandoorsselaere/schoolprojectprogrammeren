@@ -60,17 +60,14 @@ export class BaseService<T> {
     return w.toUpperCase();
   }
   getTagList() {
-    let waarden = ['Test1', 'Test2', 'Test3', 'Test4'];
+    const waarden = ['Test1', 'Test2', 'Test3', 'Test4'];
     return waarden.map(w => this.toUpper(w));
   }
 
     updateItem(_item, _identifier): Observable<T> {
-      console.log(_item);
       const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
-    return this._http.put(`${this._url}/${_identifier}`, JSON.stringify(_item), options).map((response: Response) => {
-      return <IResult<T>>response.json();
-    }).catch((error) => this.handleError(error));
+    return this._http.put(`${this._url}/${_identifier}`, JSON.stringify(_item), options).catch((error) => this.handleError(error));
   }
 
 }

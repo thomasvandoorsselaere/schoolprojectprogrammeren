@@ -26,4 +26,8 @@ export class AuteurDetailsComponent implements OnInit {
   deleteAuteur() {
       this.auteursService.deleteItem(this.auteur).subscribe(r => this.router.navigate(['/']));
     }
+
+   updateAuteur(){
+    this.auteursService.updateItem(this.auteur, this.auteur.id).subscribe(r => this.router.navigate([`/auteurs`]));
+  }
 }

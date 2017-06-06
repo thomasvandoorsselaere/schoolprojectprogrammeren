@@ -1,7 +1,7 @@
 <div class="container-fluid" *ngFor="let auteur of auteurs">
   <div class="row">
     <app-collapsible-well>
-        <div well-title>{{auteur.id}}, {{ auteur.naam }}</div>
+        <div well-title>{{ auteur.naam }}</div>
         <div well-body>
                 <span class="detailsbtn">
                   <button type="button" class="btn btn-primary btn-md" [routerLink]="['/auteurs', auteur.id]" >Wijzig auteur</button>
