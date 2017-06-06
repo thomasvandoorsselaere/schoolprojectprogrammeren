@@ -19,6 +19,6 @@ export class EditbookComponent implements OnInit {
      this.book = this.route.snapshot.data['bookdetails'];
   }
   updateBoek(){
-    this.bookService.updateBook(this.book).subscribe(r => this.router.navigate(['/']));
+    this.bookService.updateItem(this.book, this.book.isbn).subscribe(r => this.router.navigate(['/']));
   }
 }
