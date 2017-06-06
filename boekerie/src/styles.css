@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 .badge {
     margin-right:5px;
+    margin-top:5px;
 }
 .genre p {
     font-weight: bold;
@@ -22,4 +23,7 @@
     background-color:#fff;
     border: 1px solid #ccc;
 
+}
+.next-row {
+    margin-top: 10px;
 }

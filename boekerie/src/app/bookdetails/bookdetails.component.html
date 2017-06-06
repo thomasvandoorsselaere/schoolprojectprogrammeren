@@ -1,4 +1,4 @@
-  <popup #popupdelete (confirmClick)="VewijderenBoek()">
+  <popup #popupdelete (confirmClick)="VerwijderenBoek()">
     Bent u zeker dat u het boek wilt verwijderen?
   </popup>
   
@@ -34,7 +34,7 @@
     </span>
   </div>
   <div class="col-md-3">
-    <button class="btn btn-success" (click)="PopupVerwijderenBoek()">Verwijder boek</button>
+    <button class="btn btn-danger" (click)="PopupVerwijderenBoek()">Verwijder boek</button>
   </div>
 
  <button class="btn btn-success" [routerLink]="['/edit', book.isbn]">edit boek</button>

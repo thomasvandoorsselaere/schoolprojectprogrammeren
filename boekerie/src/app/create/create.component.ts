@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IBook, IGenre, IAuteur } from '../shared/index';
 import { AuteursService } from '../shared/auteurs.service';
@@ -7,6 +7,7 @@ import { BookService } from 'app/shared/books.service';
 import { BaseService } from 'app/shared/base.service';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
+import { Popup } from 'ng2-opd-popup';
 
 @Component({
   selector: 'app-create',
@@ -22,9 +23,13 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
   availableTags: string[]= [];
   newTagModel = null;
   book: IBook = <IBook>{};
-
+  auteur: IAuteur = <IAuteur>{};
+  genre: IGenre = <IGenre>{};
   selectedAuteur: IAuteur = undefined;
   selectedGenre: IGenre = undefined;
+
+  @ViewChild('popupAddAuteur') popupAddAuteur: Popup;
+  @ViewChild('popupAddGenre') popupAddGenre: Popup;
 
   constructor(
     private auteursService: AuteursService,
@@ -67,6 +72,79 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
     this.newTagModel = null;
 
   }
+
+  popupAuteurToevoegen() {
+    this.popupAddAuteur.options = {
+      header: 'Auteur toevoegen',
+      color: '#62A2AB',
+      widthProsentage: 40,
+      animationDuration: 1,
+      showButtons: true,
+      confirmBtnContent: 'OK',
+      cancleBtnContent: 'Cancel',
+      confirmBtnClass: 'btn btn-primary',
+      cancleBtnClass: 'btn btn-default',
+      animation: 'fadeInDown'
+    };
+    this.popupAddAuteur.show(this.popupAddAuteur.options);
+  }
+
+  addAuteur(auteur) {
+    console.log('this.book.auteur: ', this.book.auteur);
+    console.log('auteur: ', auteur);
+    for ( const auteurElement in this.auteurs ) {
+      if (this.auteurs[auteurElement].naam === auteur.naam) {
+        this.book.auteur = this.auteurs[auteurElement];
+        break;
+      } else {
+        if (+auteurElement === (this.auteurs.length - 1)) {
+          console.log(this.auteurs.length - 1 );
+          this.auteursService.postItem(auteur).subscribe(r =>
+          this.auteursService.getAuteurs().subscribe(
+            data => (this.auteurs = data.value) && (this.book.auteur = this.auteurs[auteurElement + 1])
+            )
+          );
+        }
+      }
+    }
+  }
+  popupGenreToevoegen() {
+    this.popupAddGenre.options = {
+      header: 'Genre toevoegen',
+      color: '#62A2AB',
+      widthProsentage: 40,
+      animationDuration: 1,
+      showButtons: true,
+      confirmBtnContent: 'OK',
+      cancleBtnContent: 'Cancel',
+      confirmBtnClass: 'btn btn-primary',
+      cancleBtnClass: 'btn btn-default',
+      animation: 'fadeInDown'
+    };
+    this.popupAddGenre.show(this.popupAddGenre.options);
+  }
+
+  addGenre(genre) {
+    console.log('this.book.genre: ', this.book.genre);
+    console.log('genre: ', genre);
+    // tslint:disable-next-line:max-line-length
+    for ( const genreElement in this.genre ) {
+      if (this.genre[genreElement].naam === genre.naam) {
+        this.book.genre = this.genres[genreElement];
+        break;
+      } else {
+        if (+genreElement === (this.genres.length - 1)) {
+          console.log(this.genres.length - 1 );
+          this.genresService.postItem(genre).subscribe(r =>
+          this.genresService.getGenres().subscribe(
+            data => (this.genres = data.value) && (this.book.genre = this.genres[genreElement + 1])
+            )
+          );
+        }
+      }
+    }
+  }
+
 
   saveBook() {
     this.book.tags = this.selectedTags;

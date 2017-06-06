@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { IAuteur } from '../shared/auteur.model';
 import { AuteursService } from 'app/shared/auteurs.service';
@@ -13,11 +13,11 @@ export class AuteursComponent implements OnInit {
 
   auteurs: IAuteur[] = [];
 
-  constructor(private auteursService: AuteursService ) { }
+  constructor(private auteursService: AuteursService, private router: Router ) { }
 
   ngOnInit() {
     /*getAuteurs i.p.v. getList => dit omwille van null-check die niet aanwezig is op getList*/
     this.auteursService.getAuteurs().subscribe((data) => {this.auteurs = data.value; });
-  }
+    }
 
 }

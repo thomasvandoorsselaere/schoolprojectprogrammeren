@@ -19,4 +19,5 @@ export class AuteursService extends BaseService<IAuteur> {
       return result;
     });
   }
+
 }

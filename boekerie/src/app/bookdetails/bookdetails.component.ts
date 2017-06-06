@@ -31,7 +31,7 @@ export class BookDetailsComponent implements OnInit {
       showButtons: true,
       confirmBtnContent: 'OK',
       cancleBtnContent: 'Cancel',
-      confirmBtnClass: 'btn btn-default',
+      confirmBtnClass: 'btn btn-primary',
       cancleBtnClass: 'btn btn-default',
       animation: 'fadeInDown'
     };
@@ -40,7 +40,7 @@ export class BookDetailsComponent implements OnInit {
 
   }
 
-  VewijderenBoek(){
+  VerwijderenBoek() {
     this.bookService.deleteItem(this.book).subscribe(r => this.router.navigate(['/']));
   }
 }
