@@ -88,26 +88,7 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
     };
     this.popupAddAuteur.show(this.popupAddAuteur.options);
   }
-
-  addAuteur(auteur) {
-    console.log('this.book.auteur: ', this.book.auteur);
-    console.log('auteur: ', auteur);
-    for ( const auteurElement in this.auteurs ) {
-      if (this.auteurs[auteurElement].naam === auteur.naam) {
-        this.book.auteur = this.auteurs[auteurElement];
-        break;
-      } else {
-        if (+auteurElement === (this.auteurs.length - 1)) {
-          console.log(this.auteurs.length - 1 );
-          this.auteursService.postItem(auteur).subscribe(r =>
-          this.auteursService.getAuteurs().subscribe(
-            data => (this.auteurs = data.value) && (this.book.auteur = this.auteurs[auteurElement + 1])
-            )
-          );
-        }
-      }
-    }
-  }
+  
   popupGenreToevoegen() {
     this.popupAddGenre.options = {
       header: 'Genre toevoegen',
@@ -124,21 +105,31 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
     this.popupAddGenre.show(this.popupAddGenre.options);
   }
 
+  addAuteur(auteur) {
+    for ( const auteurElement in this.auteurs ) {
+      if (this.auteurs[auteurElement].naam === auteur.naam) {
+        this.book.auteur = this.auteurs[auteurElement];
+        break;
+      } else {
+        if (+auteurElement === (this.auteurs.length - 1)) {
+          this.auteursService.postItem(auteur).subscribe(r =>
+          this.auteurs.push(r) && (this.book.auteur = r)
+          );
+        }
+      }
+    }
+  }
+
+
   addGenre(genre) {
-    console.log('this.book.genre: ', this.book.genre);
-    console.log('genre: ', genre);
-    // tslint:disable-next-line:max-line-length
-    for ( const genreElement in this.genre ) {
-      if (this.genre[genreElement].naam === genre.naam) {
+    for ( const genreElement in this.genres ) {
+      if (this.genres[genreElement].naam === genre.naam) {
         this.book.genre = this.genres[genreElement];
         break;
       } else {
         if (+genreElement === (this.genres.length - 1)) {
-          console.log(this.genres.length - 1 );
           this.genresService.postItem(genre).subscribe(r =>
-          this.genresService.getGenres().subscribe(
-            data => (this.genres = data.value) && (this.book.genre = this.genres[genreElement + 1])
-            )
+            this.genres.push(r) && (this.book.genre = r)
           );
         }
       }

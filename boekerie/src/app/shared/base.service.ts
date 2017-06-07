@@ -50,7 +50,9 @@ export class BaseService<T> {
     console.log(item);
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
-    return this._http.post(this._url, JSON.stringify(item), options).catch((error) => this.handleError(error));
+    return this._http.post(this._url, JSON.stringify(item), options).map((response: Response) => {
+      return <T>response.json();
+    }).catch((error) => this.handleError(error));
   }
 
   toUpper(w: string) {
