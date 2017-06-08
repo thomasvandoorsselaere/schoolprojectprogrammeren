@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { IGenre } from '../shared/index';
 import { GenresService } from '../shared/genres.service';
+import { ILink } from "app/shared/links.model";
 
 @Component({
   selector: 'app-genre-edit',
@@ -11,17 +12,19 @@ import { GenresService } from '../shared/genres.service';
 })
 export class GenreEditComponent implements OnInit {
   genre: IGenre;
-  hasDeleteMethod: boolean;
+  hasDeleteMethod = false;
+  links: ILink[] = [];
   constructor(private genresService: GenresService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    let i = 0;
     this.genre = this.route.snapshot.data['genredetails'];
-    // indien manier om simpelweg te breaken in lambda "this.genre.links.forEach" => toepassen! Echter nog niet gevonden/mogelijk :(
-    while (!this.hasDeleteMethod && i < this.genre.links.length) {
-      this.genre.links.forEach(l => (l.method === 'DELETE' ? this.hasDeleteMethod = true : this.hasDeleteMethod = false));
-      i++;
-    };
+    this.links = this.genre.links;
+    console.log('hasDeleteMethod: ', this.hasDeleteMethod);
+    console.log('links: ', this.links);
+    console.log('genreLinks: ', this.genre.links)
+    this.links.forEach(l => (l.method === 'DELETE' ?
+     this.hasDeleteMethod = true : this.hasDeleteMethod = false)
+      && console.log(l.method, this.hasDeleteMethod));
   }
   deleteGenre() {
       this.genresService.deleteItem(this.genre).subscribe(r => this.router.navigate(['/']));
@@ -30,4 +33,5 @@ export class GenreEditComponent implements OnInit {
    updateGenre() {
     this.genresService.updateItem(this.genre, this.genre.id).subscribe(r => this.router.navigate([`/genres`]));
   }
+
 }

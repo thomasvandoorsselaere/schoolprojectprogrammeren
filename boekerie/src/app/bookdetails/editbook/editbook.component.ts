@@ -38,8 +38,10 @@ export class EditbookComponent implements OnInit {
      this.book = this.route.snapshot.data['bookdetails'];
      // onderstaande manier is mogelijks niet oké bij laadtijden?
      this.selectedTags = this.book.tags;
-     console.log(this.selectedTags);
+     this.auteursService.getAuteurs().subscribe(data => this.auteurs = data.value);
+     this.genresService.getGenres().subscribe(data =>  this.genres = data.value );
      this.availableTags = this.bookService.getTagList();
+     console.log(this.book.auteur)
   }
 
   // verdere controles te voorzien zodat bestaande tags niet ontdubbeld worden
@@ -109,6 +111,7 @@ export class EditbookComponent implements OnInit {
         }
       }
     }
+    this.popupAddAuteur.hide();
   }
   popupGenreToevoegen() {
     this.popupAddGenre.options = {
@@ -145,5 +148,6 @@ export class EditbookComponent implements OnInit {
         }
       }
     }
+    this.popupAddGenre.hide();
   }
 }

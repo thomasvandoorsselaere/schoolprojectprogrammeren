@@ -27,3 +27,13 @@
 .next-row {
     margin-top: 10px;
 }
+
+.error em {
+    color: red;
+}
+
+img {
+    height: 250px; 
+    width: auto;
+
+}

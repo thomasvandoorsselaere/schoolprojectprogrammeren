@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { IAuteur } from '../shared/index';
 import { AuteursService } from '../shared/auteurs.service';
+import { ILink } from 'app/shared/links.model';
 
 @Component({
   selector: 'app-auteur-edit',
@@ -11,17 +12,19 @@ import { AuteursService } from '../shared/auteurs.service';
 })
 export class AuteurDetailsComponent implements OnInit {
   auteur: IAuteur;
-  hasDeleteMethod: boolean;
+  links: ILink[];
+  hasDeleteMethod = false;
   constructor(private auteursService: AuteursService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    let i = 0;
     this.auteur = this.route.snapshot.data['auteurdetails'];
-    // indien manier om simpelweg te breaken in lambda "this.auteur.links.forEach" => toepassen! Echter nog niet gevonden/mogelijk :(
-    while (!this.hasDeleteMethod && i < this.auteur.links.length) {
-      this.auteur.links.forEach(l => l.method === 'DELETE' ? this.hasDeleteMethod = true : this.hasDeleteMethod = false);
-      i++;
-    };
+    this.links = this.auteur.links;
+    console.log('hasDeleteMethod: ', this.hasDeleteMethod);
+    console.log('links: ', this.links);
+    console.log('genreLinks: ', this.auteur.links);
+    this.links.forEach(l => (l.method === 'DELETE' ?
+     this.hasDeleteMethod = true : this.hasDeleteMethod = false)
+      && console.log(l.method, this.hasDeleteMethod));
   }
   deleteAuteur() {
       this.auteursService.deleteItem(this.auteur).subscribe(r => this.router.navigate(['/auteurs']));

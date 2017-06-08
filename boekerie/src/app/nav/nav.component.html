@@ -1,13 +1,17 @@
 <nav class="navbar navbar-inverse navbar-static-top">
   <div class="container-fluid">
-    <div class="navbar-header navbar-brand"> 
-      <a [routerLink]="['/overview']"><i class="glyphicon glyphicon-book" [routerLink]="['/overview']"></i>&nbsp;Boekerie</a>
+    <div class="navbar-header"> 
+      <div class="navbar-brand">
+        <a href="" [routerLink]="['/overview']"><i class="glyphicon glyphicon-book" [routerLink]="['/overview']"></i>&nbsp;Boekerie</a>
+      </div>
     </div>
-    <ul class="nav navbar-nav">
-      <li><a href="" [routerLink]="['/overview']">Overview</a></li>
-      <li><a href="" [routerLink]="['/create']">Create book</a></li>
-      <li><a href="" [routerLink]="['/genres']">Genres</a></li>
-      <li><a href="" [routerLink]="['/auteurs']">Auteurs</a></li>
-    </ul>
+    <div class="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="" [routerLink]="['/overview']">Overview</a></li>
+        <li><a href="" [routerLink]="['/create']">Create book</a></li>
+        <li><a href="" [routerLink]="['/genres']">Genres</a></li>
+        <li><a href="" [routerLink]="['/auteurs']">Auteurs</a></li>
+      </ul>
+    </div>
   </div>
 </nav>

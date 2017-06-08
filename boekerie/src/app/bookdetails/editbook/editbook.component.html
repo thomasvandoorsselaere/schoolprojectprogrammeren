@@ -1,16 +1,20 @@
 <popup #popupAddAuteur (confirmClick)="addAuteur(newAuteurForm.value)">
   <form #newAuteurForm="ngForm" (ngSubmit)="addAuteur(newAuteurForm.value)" autocomplete="off">
-    <label for="nieuweAuteurNaam">Naam:</label>
-    <em *ngIf="nieuweAuteurNaam?.invalid && (nieuweAuteurNaam?.touched)">Required</em>
-    <input (ngModel)="auteur.naam" name="naam" required id="naam" class="form-control" type="text" placeholder="Geef een naam in" />
+    <div class="form-group" [ngClass]="{'error': newAuteurForm.controls.naam?.touched && newAuteurForm.controls.naam?.touched}">
+      <label for="nieuweAuteurNaam">Naam:</label>
+      <em *ngIf="nieuweAuteurNaam?.invalid && (nieuweAuteurNaam?.touched)">Required</em>
+      <input (ngModel)="auteur.naam" name="naam" required id="naam" class="form-control" type="text" placeholder="Geef een naam in..." />
+    </div>
   </form>
 </popup>
 
 <popup #popupAddGenre (confirmClick)="addGenre(newGenreForm.value)">
   <form #newGenreForm="ngForm" (ngSubmit)="addGenre(newGenreForm.value)" autocomplete="off">
-    <label for="nieuwGenreNaam">Naam:</label>
-    <em *ngIf="nieuwGenreNaam?.invalid && (nieuwGenreNaam?.touched)">Required</em>
-    <input (ngModel)="genre.naam" name="naam" required id="naam" class="form-control" type="text" placeholder="Geef een naam in" />
+    <div class="form-group" [ngClass]="{'error': newGenreForm.controls.naam?.touched && newGenreForm.controls.naam?.touched}">
+      <label for="nieuwGenreNaam">Naam:</label>
+      <em *ngIf="nieuwGenreNaam?.invalid && (nieuwGenreNaam?.touched)">Required</em>
+      <input (ngModel)="genre.naam" name="naam" required id="naam" class="form-control" type="text" placeholder="Geef een naam in" />
+    </div>
   </form>
 </popup>
 
@@ -37,7 +41,7 @@
             <div class="col-md-9">
               <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" aria-expanded="true" [(ngModel)]="book.auteur" name="auteurSelector">
                 <option value="undefined">Selecteer auteur</option>
-                <option *ngFor="let auteur of auteurs" [ngValue]="auteur">{{auteur.naam}}</option>
+                <option *ngFor="let auteur of auteurs" [ngValue]="book.auteur">{{book.auteur.naam}}</option>
               </select>
               </div>
               <div class="col-md-3">
@@ -66,7 +70,7 @@
             <div class="col-md-9">
             <select class="btn btn-default dropdown-toggle form-control" aria-haspopup="true" name="genreSelector" aria-expanded="true" [(ngModel)]="book.genre">
               <option value="undefined">Selecteer genre</option>
-              <option *ngFor="let genre of genres" [ngValue]="genre">{{genre.naam}}</option>
+              <option *ngFor="let genre of genres" [ngValue]="book.genre">{{book.genre.naam}}</option>
             </select>
             </div>
             <div class="col-md-3">

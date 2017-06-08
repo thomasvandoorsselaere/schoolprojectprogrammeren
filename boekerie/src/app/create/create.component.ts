@@ -33,7 +33,9 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
 
   constructor(
     private auteursService: AuteursService,
-    private genresService: GenresService, private http: Http, private router: Router
+    private genresService: GenresService,
+    private http: Http,
+    private router: Router
     ) {
       super(router, http, CreateComponent.serviceUrl);
      }
@@ -43,7 +45,6 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
      /*getAuteurs i.p.v. getList => dit omwille van null-check die niet aanwezig is op getList*/
     this.auteursService.getAuteurs().subscribe(data => this.auteurs = data.value);
     this.genresService.getGenres().subscribe(data =>  this.genres = data.value );
-    // this.alltags = ...
   }
   removeTagFromSelected(tag) {
     const index = this.selectedTags.indexOf(tag);
@@ -118,6 +119,7 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
         }
       }
     }
+    this.popupAddAuteur.hide();
   }
 
 
@@ -134,6 +136,7 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
         }
       }
     }
+    this.popupAddGenre.hide();
   }
 
 
