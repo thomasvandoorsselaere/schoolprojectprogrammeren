@@ -146,7 +146,7 @@
       </div>
     </div>
     
-    <button type="submit" class="btn btn-primary" >Save</button>
-    <button type="button" [disabled]="editBookForm.invalid" class="btn btn-default" (click)="cancel()" [routerLink]="['/details', book.isbn]">Cancel</button>
+    <button type="submit" [disabled]="editBookForm.invalid"  class="btn btn-primary" >Save</button>
+    <button type="button" class="btn btn-default" (click)="cancel()" [routerLink]="['/details', book.isbn]">Cancel</button>
   </form>
 </div>

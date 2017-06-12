@@ -14,14 +14,30 @@ export class BookDetailsComponent implements OnInit {
 
   @ViewChild('popupdelete') popupdelete: Popup;
 
-   book: IBook;
-
+  book: IBook;
+  hasDeleteMethod = false;
+  hasPutMethod = false;
+  
   constructor(private route: ActivatedRoute, private bookService: BookService, private router: Router) { }
 
   ngOnInit() {
      this.book = this.route.snapshot.data['bookdetails'];
+     this.checkMethods();
   }
 
+  checkMethods() {
+    let i = 0;
+    while (!this.hasPutMethod && i < this.book.links.length) {
+
+      this.book.links[i].method === 'PUT' ? this.hasPutMethod = true : this.hasPutMethod = false;
+      i++;
+    }
+    while (!this.hasDeleteMethod && i < this.book.links.length) {
+
+      this.book.links[i].method === 'DELETE' ? this.hasDeleteMethod = true : this.hasDeleteMethod = false;
+      i++;
+    }
+  }
   PopupVerwijderenBoek() {
     this.popupdelete.options = {
       header: 'Verwijderen',

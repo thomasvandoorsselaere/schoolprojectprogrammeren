@@ -10,8 +10,6 @@ export class BaseService<T> {
 
     }
     public handleError(error: Response) {
-      console.log('error:', error);
-      console.log('router', this._router);
       this._router.navigate(['/auch/' + error.status]);
       return Observable.throw(error.statusText);
     }
@@ -47,7 +45,6 @@ export class BaseService<T> {
   }
 
   postItem(item): Observable<T> {
-    console.log(item);
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
     return this._http.post(this._url, JSON.stringify(item), options).map((response: Response) => {
@@ -55,7 +52,6 @@ export class BaseService<T> {
     }).catch((error) => this.handleError(error));
   }
   postItemNoResponse(item): Observable<T> {
-    console.log(item);
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
     return this._http.post(this._url, JSON.stringify(item), options).catch((error) => this.handleError(error));

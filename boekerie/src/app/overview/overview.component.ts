@@ -34,10 +34,6 @@ export class OverviewComponent implements OnInit {
     this.bookService.getList().subscribe((data) => { this.books = data.value; });
     this.auteursService.getAuteurs().subscribe(data => this.auteurs = data.value);
     this.genresService.getGenres().subscribe(data =>  this.genres = data.value );
-    // need some mocking?
-    /*this.books = this.route.snapshot.data['books'];
-    this.books.forEach(b => this.auteurs.push(b.auteur));
-    this.books.forEach(b => this.genres.push(b.genre)); */
   }
 
   sort(sortBy) {

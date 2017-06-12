@@ -16,7 +16,6 @@ export class AuteursComponent implements OnInit {
   constructor(private auteursService: AuteursService, private router: Router ) { }
 
   ngOnInit() {
-    /*getAuteurs i.p.v. getList => dit omwille van null-check die niet aanwezig is op getList*/
     this.auteursService.getAuteurs().subscribe((data) => {this.auteurs = data.value; });
     }
 

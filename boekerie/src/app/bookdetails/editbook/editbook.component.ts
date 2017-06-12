@@ -36,13 +36,11 @@ export class EditbookComponent implements OnInit {
 
   ngOnInit() {
      this.book = this.route.snapshot.data['bookdetails'];
-     // onderstaande manier is mogelijks niet oké bij laadtijden?     
      this.auteursService.getAuteurs().subscribe(data => this.auteurs = data.value);
      this.genresService.getGenres().subscribe(data =>  this.genres = data.value );
-     this.bookService.getTagList().subscribe((data) => ((this.availableTags = data) 
+     this.bookService.getTagList().subscribe((data) => ((this.availableTags = data)
      && (this.book.tags.forEach(t => this.addTagToSelected(t.toUpperCase()))) ))
      ;
-     console.log(this.book.auteur)
   }
 
   // verdere controles te voorzien zodat bestaande tags niet ontdubbeld worden
@@ -95,15 +93,12 @@ export class EditbookComponent implements OnInit {
   }
 
   addAuteur(auteur) {
-    console.log('this.book.auteur: ', this.book.auteur);
-    console.log('auteur: ', auteur);
     for ( const auteurElement in this.auteurs ) {
       if (this.auteurs[auteurElement].naam === auteur.naam) {
         this.book.auteur = this.auteurs[auteurElement];
         break;
       } else {
         if (+auteurElement === (this.auteurs.length - 1)) {
-          console.log(this.auteurs.length - 1 );
           this.auteursService.postItem(auteur).subscribe(r =>
           this.auteursService.getAuteurs().subscribe(
             data => (this.auteurs = data.value) && (this.book.auteur = this.auteurs[auteurElement + 1])
@@ -131,16 +126,12 @@ export class EditbookComponent implements OnInit {
   }
 
   addGenre(genre) {
-    console.log('this.book.genre: ', this.book.genre);
-    console.log('genre: ', genre);
-    // tslint:disable-next-line:max-line-length
     for ( const genreElement in this.genre ) {
       if (this.genre[genreElement].naam === genre.naam) {
         this.book.genre = this.genres[genreElement];
         break;
       } else {
         if (+genreElement === (this.genres.length - 1)) {
-          console.log(this.genres.length - 1 );
           this.genresService.postItem(genre).subscribe(r =>
           this.genresService.getGenres().subscribe(
             data => (this.genres = data.value) && (this.book.genre = this.genres[genreElement + 1])

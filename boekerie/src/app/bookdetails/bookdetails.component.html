@@ -25,7 +25,7 @@
     </div>
   </div>
   <hr>
-  <div class="col-md-3">
+  <div class="col-md-6">
     <span>
        <img class="img-rounded" height="250px" src="{{ book.cover }}"/>
     </span>
@@ -33,9 +33,16 @@
       <star-rating-comp [readOnly]="true" [staticColor]="'positive'" [starType]="'svg'" [rating]="book.sterren"></star-rating-comp>
     </span>
   </div>
-  <div class="col-md-3">
-    <button class="btn btn-danger" (click)="PopupVerwijderenBoek()">Verwijder boek</button>
-  </div>
-
- <button class="btn btn-success" [routerLink]="['/edit', book.isbn]">edit boek</button>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-3">
+         <button [disabled]="!hasPutMethod" class="btn btn-success" [routerLink]="['/edit', book.isbn]">Edit boek</button><br/>
+         <em *ngIf="!hasPutMethod">Dit boek kan niet gewijzigd worden...</em>
+      </div>
+      <div class="col-md-3">
+        <button [disabled]="!hasDeleteMethod" class="btn btn-danger" (click)="PopupVerwijderenBoek()">Verwijder boek</button><br/>
+        <em *ngIf="!hasDeleteMethod">Dit boek kan niet verwijderd worden...</em>
+      </div>   
+    </div>
+ </div>
 </div>

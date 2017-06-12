@@ -13,7 +13,8 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-3">
-                            <button class="btn btn-success" type="submit">Wijzig genre</button>
+                            <button [disabled]="!hasPutMethod" class="btn btn-success" type="submit">Wijzig genre</button><br/>
+                            <em *ngIf="!hasPutMethod">Dit genre kan niet gewijzigd worden...</em>
                         </div>
                         <div class="col-md-6">
                             <button [disabled]="!hasDeleteMethod" class="btn btn-danger" type="button" (click)="deleteGenre()">Verwijder genre</button><br/>

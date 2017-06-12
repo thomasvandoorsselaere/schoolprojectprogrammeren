@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { IGenre } from '../shared/index';
 import { GenresService } from '../shared/genres.service';
-import { ILink } from "app/shared/links.model";
+import { ILink } from 'app/shared/links.model';
 
 @Component({
   selector: 'app-genre-edit',
@@ -13,19 +13,28 @@ import { ILink } from "app/shared/links.model";
 export class GenreEditComponent implements OnInit {
   genre: IGenre;
   hasDeleteMethod = false;
-  links: ILink[] = [];
+  hasPutMethod = false;
   constructor(private genresService: GenresService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.genre = this.route.snapshot.data['genredetails'];
-    this.links = this.genre.links;
-    console.log('hasDeleteMethod: ', this.hasDeleteMethod);
-    console.log('links: ', this.links);
-    console.log('genreLinks: ', this.genre.links)
-    this.links.forEach(l => (l.method === 'DELETE' ?
-     this.hasDeleteMethod = true : this.hasDeleteMethod = false)
-      && console.log(l.method, this.hasDeleteMethod));
+    this.checkMethods();
   }
+
+  checkMethods() {
+    let i = 0;
+    while (!this.hasPutMethod && i < this.genre.links.length) {
+
+      this.genre.links[i].method === 'PUT' ? this.hasPutMethod = true : this.hasPutMethod = false;
+      i++;
+    }
+    while (!this.hasDeleteMethod && i < this.genre.links.length) {
+
+      this.genre.links[i].method === 'DELETE' ? this.hasDeleteMethod = true : this.hasDeleteMethod = false;
+      i++;
+    }
+  }
+
   deleteGenre() {
       this.genresService.deleteItem(this.genre).subscribe(r => this.router.navigate(['/']));
     }

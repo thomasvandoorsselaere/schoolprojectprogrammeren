@@ -91,7 +91,6 @@ export class BookService extends BaseService<IBook> {
     return w.toUpperCase();
   }
 
-  
   getTagList(): Observable<string[]> {
     let books;
         let tags: string[] = [];
@@ -104,144 +103,12 @@ export class BookService extends BaseService<IBook> {
     })
   }
   removeDuplicates(tags: string[]){
-    let newTags: string[] = [];
-
-    for (let tag in tags) {
-      console.log('tag voor if: ', tag)
+    const newTags: string[] = [];
+    for (const tag in tags) {
       if (newTags.indexOf(tags[tag]) === -1){
-        console.log('indexOf: ', newTags.indexOf(tag))
-        console.log(tag)
         newTags.push(tags[tag].toUpperCase())
       }
     }
     return newTags.sort();
   }
 }
-
-
-//Data voor mock
-const BOOKS: IBook[] = [
-  {
-    isbn: '9780007448036',
-    titel: 'A Song Of Ice And Fire: A Game Of Thrones',
-    auteur: {
-        id: 1,
-        naam: 'George R. R. Martin',
-        links: [{
-          'href': 'http://apis.dirkandries.be/api/Auteurs/1',
-          'rel': 'get_auteur',
-          'method': 'GET'
-        }]
-    },
-    genre: {
-      id: 1,
-      naam: 'Roman',
-      links: [{
-        href: 'http://apis.dirkandries.be/api/Genres/1',
-        rel: 'get_genre',
-        method: 'GET'
-      }]
-    },
-    uitgegeven: 1996,
-    cover: 'http://www.isfdb.org/wiki/images/d/d2/GMFTHRNSDD0000.jpg',
-    sterren: 5,
-    tags: ['Oorlog', 'Complot', 'Tieten', 'Fantasy', 'Ridders, jonkvrouwen en draken'],
-    links: [{
-      href: 'books/9780007448036',
-      rel: 'self',
-      method: 'GET'
-    },
-    {
-      href: 'books/9780007448036',
-      rel: 'update_boek',
-      method: 'PUT'
-    },
-    {
-      href: 'books/9780007448036',
-      rel: 'delete_boek',
-      method: 'DELETE'
-    }]
-  },
-  {
-    isbn: '9024557054',
-    titel: 'The Da Vinci Code',
-    auteur: {
-        id: 2,
-        naam: 'Dan Brown',
-        links: [{
-          'href': 'http://apis.dirkandries.be/api/Auteurs/1',
-          'rel': 'get_auteur',
-          'method': 'GET'
-        }]
-    },
-    genre: {
-      id: 2,
-      naam: 'Fictie',
-      links: [{
-        'href': 'http://apis.dirkandries.be/api/Genres/1',
-        'rel': 'get_genre',
-        'method': 'GET'
-      }]
-    },
-    uitgegeven: 2004,
-    cover: 'https://s.s-bol.com/imgbase0/imagebase3/large/FC/6/8/8/1/1001004002781886.jpg',
-    sterren: 4,
-    tags: ['Religie', 'Complot', 'Thriller', 'Misdaad', 'Tempeliers', 'Mysterie'],
-    links: [{
-      href: 'books/9024557054',
-      rel: 'self',
-      method: 'GET'
-    },
-    {
-      href: 'books/9024557054',
-      rel: 'update_boek',
-      method: 'PUT'
-    },
-    {
-      href: 'books/9024557054',
-      rel: 'delete_boek',
-      method: 'DELETE'
-    }]
-  },
-  {
-    isbn: '9789025743772',
-    titel: 'Trekking in Zweden',
-    auteur: {
-        id: 3,
-        naam: 'Sander Van Der Werf',
-        links: [
-          {'href': 'http://apis.dirkandries.be/api/Auteurs/1',
-          'rel': 'get_auteur',
-          'method': 'GET'
-        }]
-    },
-    genre: {
-      id: 3,
-      naam: 'Documentaire',
-      links: [{
-        'href': 'http://apis.dirkandries.be/api/Genres/1',
-        'rel': 'get_genre',
-        'method': 'GET'
-      }]
-    },
-    uitgegeven: 2009,
-    cover: 'https://s.s-bol.com/imgbase0/imagebase3/large/FC/5/6/0/1/1001004006421065.jpg',
-    sterren: 5,
-    tags: ['Trekken', 'Camperen', 'Zweden', 'Survival'],
-    links: [{
-      href: 'books/9789025743772',
-      rel: 'self',
-      method: 'GET'
-    },
-    {
-      href: 'books/9789025743772',
-      rel: 'update_boek',
-      method: 'PUT'
-    },
-    {
-      href: 'books/9789025743772',
-      rel: 'delete_boek',
-      method: 'DELETE'
-    }]
-  }
-];

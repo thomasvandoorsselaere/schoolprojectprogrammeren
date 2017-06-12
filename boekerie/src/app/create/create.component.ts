@@ -73,7 +73,7 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
     this.newTagModel = null;
 
   }
-  
+
   popupAuteurToevoegen() {
     this.popupAddAuteur.options = {
       header: 'Auteur toevoegen',
@@ -89,7 +89,7 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
     };
     this.popupAddAuteur.show(this.popupAddAuteur.options);
   }
-  
+
   popupGenreToevoegen() {
     this.popupAddGenre.options = {
       header: 'Genre toevoegen',
@@ -142,7 +142,6 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
 
   saveBook() {
     this.book.tags = this.selectedTags;
-    console.log(this.book);
     this.postItemNoResponse(this.book).subscribe();
     return this.router.navigate(['/']);
   }

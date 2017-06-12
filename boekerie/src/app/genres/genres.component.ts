@@ -16,7 +16,6 @@ export class GenresComponent implements OnInit {
   constructor(private genresService: GenresService ) { }
 
   ngOnInit() {
-    /*getAuteurs i.p.v. getList => dit omwille van null-check die niet aanwezig is op getList*/
     this.genresService.getGenres().subscribe((data) => {this.genres = data.value; });
   }
 
