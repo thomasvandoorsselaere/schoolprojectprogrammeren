@@ -30,7 +30,7 @@
        <img class="img-rounded" height="250px" src="{{ book.cover }}"/>
     </span>
     <span>
-      <star-rating-comp [staticColor]="'positive'" [starType]="'svg'" [rating]="book.sterren"></star-rating-comp>
+      <star-rating-comp [readOnly]="true" [staticColor]="'positive'" [starType]="'svg'" [rating]="book.sterren"></star-rating-comp>
     </span>
   </div>
   <div class="col-md-3">

@@ -33,20 +33,6 @@ export class BookService extends BaseService<IBook> {
     return this.getFilteredItems(this.params);
   }
 
-  // indien mock nodig is (a.k.a. API-offline-toestanden), geeft onderstaande redding (alle bovenstaande zaken mogen in commentaar, overview.component.ts moet ook nog aangepast worden ifv mock)
-  /* books: IBook[] = BOOKS;
-  constructor(private http: Http) {
-  }
-  getBooks() {
-    return this.books;
-  }
-
-  getDetails(isbn) {
-    return this.getBooks().find(i => i.isbn === isbn);
-  }
-*/
-// einde mock
-
   sorteerOpTitelDesc(b1: IBook, b2: IBook) {
       if (b1.titel > b2.titel) {
         return 1;
@@ -99,6 +85,36 @@ export class BookService extends BaseService<IBook> {
         books.sort(this.sorteerOpAuteurDesc);
       }
     }
+  }
+
+  toUpper(w: string) {
+    return w.toUpperCase();
+  }
+
+  
+  getTagList(): Observable<string[]> {
+    let books;
+        let tags: string[] = [];
+    return this.getList().map((data) => {
+      books = data.value;
+      books.forEach(b =>
+        tags = tags.concat(b.tags));
+         tags.map(t => this.toUpper(t));
+      return this.removeDuplicates(tags)
+    })
+  }
+  removeDuplicates(tags: string[]){
+    let newTags: string[] = [];
+
+    for (let tag in tags) {
+      console.log('tag voor if: ', tag)
+      if (newTags.indexOf(tags[tag]) === -1){
+        console.log('indexOf: ', newTags.indexOf(tag))
+        console.log(tag)
+        newTags.push(tags[tag].toUpperCase())
+      }
+    }
+    return newTags.sort();
   }
 }
 

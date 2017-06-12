@@ -12,7 +12,7 @@ export class BaseService<T> {
     public handleError(error: Response) {
       console.log('error:', error);
       console.log('router', this._router);
-      this._router.navigate(['/auch', error.status]);
+      this._router.navigate(['/auch/' + error.status]);
       return Observable.throw(error.statusText);
     }
 
@@ -54,14 +54,13 @@ export class BaseService<T> {
       return <T>response.json();
     }).catch((error) => this.handleError(error));
   }
+  postItemNoResponse(item): Observable<T> {
+    console.log(item);
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+    return this._http.post(this._url, JSON.stringify(item), options).catch((error) => this.handleError(error));
+  }
 
-  toUpper(w: string) {
-    return w.toUpperCase();
-  }
-  getTagList() {
-    const waarden = ['Test1', 'Test2', 'Test3', 'Test4'];
-    return waarden.map(w => this.toUpper(w));
-  }
 
     updateItem(_item, _identifier): Observable<T> {
       const headers = new Headers({ 'Content-Type': 'application/json' });

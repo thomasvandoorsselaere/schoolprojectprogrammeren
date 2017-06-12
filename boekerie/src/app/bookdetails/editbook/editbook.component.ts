@@ -36,11 +36,12 @@ export class EditbookComponent implements OnInit {
 
   ngOnInit() {
      this.book = this.route.snapshot.data['bookdetails'];
-     // onderstaande manier is mogelijks niet oké bij laadtijden?
-     this.selectedTags = this.book.tags;
+     // onderstaande manier is mogelijks niet oké bij laadtijden?     
      this.auteursService.getAuteurs().subscribe(data => this.auteurs = data.value);
      this.genresService.getGenres().subscribe(data =>  this.genres = data.value );
-     this.availableTags = this.bookService.getTagList();
+     this.bookService.getTagList().subscribe((data) => ((this.availableTags = data) 
+     && (this.book.tags.forEach(t => this.addTagToSelected(t.toUpperCase()))) ))
+     ;
      console.log(this.book.auteur)
   }
 

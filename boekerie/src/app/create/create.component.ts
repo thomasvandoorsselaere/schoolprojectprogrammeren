@@ -35,16 +35,16 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
     private auteursService: AuteursService,
     private genresService: GenresService,
     private http: Http,
-    private router: Router
+    private router: Router,
+    private bookService: BookService
     ) {
       super(router, http, CreateComponent.serviceUrl);
      }
 
   ngOnInit() {
-    this.availableTags = this.getTagList();
-     /*getAuteurs i.p.v. getList => dit omwille van null-check die niet aanwezig is op getList*/
     this.auteursService.getAuteurs().subscribe(data => this.auteurs = data.value);
     this.genresService.getGenres().subscribe(data =>  this.genres = data.value );
+    this.bookService.getTagList().subscribe(data => this.availableTags = data);
   }
   removeTagFromSelected(tag) {
     const index = this.selectedTags.indexOf(tag);
@@ -73,7 +73,7 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
     this.newTagModel = null;
 
   }
-
+  
   popupAuteurToevoegen() {
     this.popupAddAuteur.options = {
       header: 'Auteur toevoegen',
@@ -143,6 +143,7 @@ export class CreateComponent extends BaseService<IBook> implements OnInit {
   saveBook() {
     this.book.tags = this.selectedTags;
     console.log(this.book);
-    return this.postItem(this.book).subscribe();
+    this.postItemNoResponse(this.book).subscribe();
+    return this.router.navigate(['/']);
   }
 }
