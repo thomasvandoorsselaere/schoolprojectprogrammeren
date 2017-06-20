@@ -22,7 +22,16 @@
 <hr>
 <div class="container-fluid">
   <form #editBookForm="ngForm" (ngSubmit)="updateBoek()" autocomplete="off" novaliauthor>
-
+    
+    <div class="row">
+      <div class="col-md-9">
+        <div class="form-group">
+          <label for="bookIsbn">ISBN:</label>
+              <input [ngModel]="book.isbn" readonly name="isbn" id="bookIsbn" type="text" class="form-control" />
+        </div>
+      </div>
+    </div>
+    
     <div class="row">
       <div class="col-md-9">
         <div class="form-group" [ngClass]="{'error': editBookForm.controls.titel?.invalid && editBookForm.controls.titel?.touched}">
@@ -52,15 +61,7 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-9">
-        <div class="form-group" [ngClass]="{'error': editBookForm.controls.isbn?.invalid && editBookForm.controls.isbn?.touched}">
-          <label for="bookIsbn">ISBN:</label>
-            <em *ngIf="editBookForm.controls.isbn?.invalid && (editBookForm.controls.isbn?.touched)">Required</em>
-              <input [(ngModel)]="book.isbn" name="isbn" required id="bookIsbn" type="text" class="form-control" placeholder="Geef de ISBN nummer" />
-        </div>
-      </div>
-    </div>
+
 
     <div class="row">
       <div class="col-md-9">
