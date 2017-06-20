@@ -98,8 +98,7 @@ export class BookService extends BaseService<IBook> {
       books = data.value;
       books.forEach(b =>
         tags = tags.concat(b.tags));
-         tags.map(t => this.toUpper(t));
-      return this.removeDuplicates(tags)
+      return this.removeDuplicates(tags.map(t => this.toUpper(t)));
     })
   }
   removeDuplicates(tags: string[]){
